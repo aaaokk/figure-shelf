@@ -1,1082 +1,392 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>FIGURE SHELF</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      background: #f5f5f0;
-      color: #111;
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Helvetica Neue",
-        Arial,
-        sans-serif;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      font: inherit;
-    }
-
-    /* =========================
-       HEADER
-    ========================= */
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: #111;
-      color: #fff;
-    }
-
-    .header-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 18px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 22px;
-      font-weight: 900;
-      letter-spacing: -1px;
-    }
-
-    .logo span {
-      color: #ff3b30;
-    }
-
-    nav {
-      display: flex;
-      gap: 22px;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    nav a {
-      opacity: .75;
-    }
-
-    nav a:hover {
-      opacity: 1;
-    }
-
-    /* =========================
-       MAIN
-    ========================= */
-
-    main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 70px 24px 100px;
-    }
-
-    .hero {
-      margin-bottom: 80px;
-    }
-
-    .hero-label {
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 2px;
-      margin-bottom: 18px;
-    }
-
-    .hero h1 {
-      margin: 0 0 28px;
-      font-size: clamp(48px, 8vw, 92px);
-      line-height: .88;
-      letter-spacing: -5px;
-    }
-
-    .hero h1 span {
-      color: #ff3b30;
-    }
-
-    .hero p {
-      max-width: 620px;
-      margin: 0;
-      font-size: 17px;
-      line-height: 1.8;
-    }
-
-    /* =========================
-       SECTION
-    ========================= */
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      border-top: 3px solid #111;
-      padding-top: 15px;
-      margin-bottom: 25px;
-    }
-
-    .section-title {
-      font-size: 14px;
-      font-weight: 900;
-      letter-spacing: 1px;
-    }
-
-    .section-subtitle {
-      color: #666;
-      font-size: 12px;
-    }
-
-    /* =========================
-       FIGURE GRID
-    ========================= */
-
-    .figure-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .figure-card {
-      background: #fff;
-      border: 2px solid #111;
-      cursor: pointer;
-      transition:
-        transform .15s ease,
-        box-shadow .15s ease;
-    }
-
-    .figure-card:hover {
-      transform: translate(-4px, -4px);
-      box-shadow: 6px 6px 0 #111;
-    }
-
-    .figure-image {
-      aspect-ratio: 1 / 1;
-      background: #e5e5e0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
-
-    .figure-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .placeholder {
-      padding: 20px;
-      color: #777;
-      font-size: 12px;
-      text-align: center;
-    }
-
-    .figure-info {
-      padding: 18px;
-      border-top: 2px solid #111;
-    }
-
-    .figure-maker {
-      margin-bottom: 7px;
-      color: #777;
-      font-size: 11px;
-      font-weight: 900;
-      text-transform: uppercase;
-    }
-
-    .figure-name {
-      margin-bottom: 16px;
-      font-size: 21px;
-      font-weight: 900;
-      letter-spacing: -1px;
-    }
-
-    .figure-stats {
-      display: flex;
-      gap: 18px;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    /* =========================
-       MODAL
-    ========================= */
-
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 200;
-      padding: 25px;
-      background: rgba(0, 0, 0, .78);
-      overflow-y: auto;
-    }
-
-    .modal.active {
-      display: block;
-    }
-
-    .modal-content {
-      max-width: 1000px;
-      margin: 20px auto;
-      background: #f5f5f0;
-      border: 3px solid #111;
-    }
-
-    .modal-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 20px;
-      background: #fff;
-      border-bottom: 3px solid #111;
-    }
-
-    .modal-close {
-      border: 0;
-      background: transparent;
-      font-size: 30px;
-      cursor: pointer;
-    }
-
-    .modal-body {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .modal-image {
-      min-height: 500px;
-      background: #ddd;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
-
-    .modal-image img {
-      width: 100%;
-      height: 100%;
-      max-height: 600px;
-      object-fit: cover;
-    }
-
-    .modal-info {
-      padding: 35px;
-    }
-
-    .modal-maker {
-      margin-bottom: 10px;
-      color: #777;
-      font-size: 12px;
-      font-weight: 900;
-    }
-
-    .modal-title {
-      margin-bottom: 30px;
-      font-size: 42px;
-      line-height: 1;
-      font-weight: 900;
-      letter-spacing: -2px;
-    }
-
-    /* =========================
-       OWNERSHIP
-    ========================= */
-
-    .ownership {
-      margin-bottom: 20px;
-      padding: 20px;
-      background: #111;
-      color: #fff;
-    }
-
-    .ownership-number {
-      margin-bottom: 5px;
-      font-size: 44px;
-      line-height: 1;
-      font-weight: 900;
-    }
-
-    .ownership-label {
-      color: #aaa;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .own-button {
-      width: 100%;
-      padding: 17px;
-      border: 3px solid #111;
-      background: #ff3b30;
-      color: #fff;
-      font-size: 15px;
-      font-weight: 900;
-      cursor: pointer;
-    }
-
-    .own-button:hover {
-      background: #111;
-    }
-
-    .own-button.owned {
-      background: #111;
-    }
-
-    /* =========================
-       PHOTOS
-    ========================= */
-
-    .photos-section,
-    .owners-section {
-      padding: 25px;
-      border-top: 3px solid #111;
-    }
-
-    .sub-title {
-      margin-bottom: 18px;
-      font-size: 14px;
-      font-weight: 900;
-    }
-
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-    }
-
-    .photo {
-      aspect-ratio: 1 / 1;
-      background: #ddd;
-      overflow: hidden;
-    }
-
-    .photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .photo-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #777;
-      font-size: 11px;
-      text-align: center;
-    }
-
-    /* =========================
-       OWNERS
-    ========================= */
-
-    .owner-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .owner {
-      padding: 10px 14px;
-      background: #fff;
-      border: 2px solid #111;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================= */
-
-    @media (max-width: 800px) {
-
-      main {
-        padding: 45px 15px 70px;
-      }
-
-      .header-inner {
-        padding: 15px;
-      }
-
-      nav {
-        gap: 10px;
-      }
-
-      .figure-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .modal {
-        padding: 10px;
-      }
-
-      .modal-body {
-        grid-template-columns: 1fr;
-      }
-
-      .modal-image {
-        min-height: 350px;
-      }
-
-      .photo-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 500px) {
-
-      nav a:nth-child(2) {
-        display: none;
-      }
-
-      .figure-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero h1 {
-        letter-spacing: -3px;
-      }
-
-      .modal-title {
-        font-size: 32px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HENTAI FIGURE SHELF</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+ margin:0;
+ background:#111;
+ color:#eee;
+ font-family:Arial,"Noto Sans JP",sans-serif;
+}
+
+header{
+ position:sticky;
+ top:0;
+ z-index:10;
+ background:#090909;
+ border-bottom:1px solid #333;
+ padding:18px 24px;
+}
+
+.header{
+ max-width:1200px;
+ margin:auto;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+}
+
+.logo{
+ font-size:22px;
+ font-weight:900;
+ letter-spacing:.08em;
+}
+
+.logo span{
+ color:#e43b70;
+}
+
+main{
+ max-width:1200px;
+ margin:auto;
+ padding:55px 24px 100px;
+}
+
+.hero{
+ margin-bottom:60px;
+}
+
+.hero small{
+ color:#e43b70;
+ font-weight:bold;
+ letter-spacing:.15em;
+}
+
+.hero h1{
+ font-size:clamp(42px,8vw,90px);
+ line-height:.9;
+ margin:15px 0;
+}
+
+.hero p{
+ color:#aaa;
+ line-height:1.8;
+ max-width:650px;
+}
+
+.section-title{
+ border-top:2px solid #eee;
+ padding-top:14px;
+ margin-bottom:25px;
+ font-weight:bold;
+}
+
+.grid{
+ display:grid;
+ grid-template-columns:
+ repeat(auto-fill,minmax(220px,1fr));
+ gap:18px;
+}
+
+.card{
+ background:#1b1b1b;
+ border:1px solid #333;
+ cursor:pointer;
+ transition:.2s;
+}
+
+.card:hover{
+ transform:translateY(-4px);
+ border-color:#e43b70;
+}
+
+.image{
+ aspect-ratio:1;
+ background:#292929;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ color:#777;
+}
+
+.info{
+ padding:17px;
+}
+
+.maker{
+ color:#999;
+ font-size:11px;
+ margin-bottom:7px;
+}
+
+.name{
+ font-size:18px;
+ font-weight:bold;
+}
+
+.meta{
+ margin-top:12px;
+ color:#999;
+ font-size:12px;
+}
+
+.notice{
+ margin-top:60px;
+ padding:18px;
+ border:1px solid #444;
+ color:#999;
+ font-size:12px;
+ line-height:1.7;
+}
+
+.modal{
+ display:none;
+ position:fixed;
+ inset:0;
+ z-index:100;
+ background:#000c;
+ padding:20px;
+ overflow:auto;
+}
+
+.modal.show{
+ display:block;
+}
+
+.modal-box{
+ max-width:900px;
+ margin:30px auto;
+ background:#181818;
+ border:1px solid #444;
+}
+
+.modal-head{
+ display:flex;
+ justify-content:space-between;
+ padding:15px 20px;
+ border-bottom:1px solid #333;
+}
+
+.close{
+ border:0;
+ background:none;
+ color:white;
+ font-size:28px;
+ cursor:pointer;
+}
+
+.detail{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+}
+
+.detail-image{
+ min-height:450px;
+ background:#292929;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ color:#777;
+}
+
+.detail-info{
+ padding:35px;
+}
+
+.detail-info h2{
+ font-size:34px;
+ margin-top:0;
+}
+
+.row{
+ padding:14px 0;
+ border-bottom:1px solid #333;
+}
+
+.row b{
+ display:inline-block;
+ width:110px;
+ color:#999;
+}
+
+@media(max-width:700px){
+ .detail{
+  grid-template-columns:1fr;
+ }
+
+ .detail-image{
+  min-height:300px;
+ }
+}
+</style>
 </head>
 
 <body>
 
 <header>
-
-  <div class="header-inner">
-
-    <div class="logo">
-      FIGURE<span>SHELF</span>
-    </div>
-
-    <nav>
-      <a href="#">FIGURES</a>
-      <a href="#">OWNERS</a>
-      <a href="#">MY SHELF</a>
-    </nav>
-
-  </div>
-
+<div class="header">
+<div class="logo">
+HENTAI <span>FIGURE SHELF</span>
+</div>
+</div>
 </header>
-
 
 <main>
 
-  <section class="hero">
+<section class="hero">
 
-    <div class="hero-label">
-      A SHARED COLLECTION
-    </div>
+<small>ADULT FIGURE DATABASE</small>
 
-    <h1>
-      ONE FIGURE.<br>
-      <span>MANY OWNERS.</span>
-    </h1>
+<h1>
+HENTAI<br>
+FIGURE SHELF
+</h1>
 
-    <p>
-      同じフィギュアを持っている人たちで、
-      写真や記録を共有する。
-      FIGURE SHELFは、フィギュアを中心にした
-      ネット上の共同コレクションです。
-    </p>
+<p>
+成人向けフィギュアを中心に、
+フィギュアそのものを主役として記録・共有する
+データベース。
+</p>
 
-  </section>
+</section>
 
+<section>
 
-  <section>
+<div class="section-title">
+FIGURES
+</div>
 
-    <div class="section-header">
+<div id="grid" class="grid"></div>
 
-      <div class="section-title">
-        PICK UP FIGURES
-      </div>
+</section>
 
-      <div class="section-subtitle">
-        みんなが所有しているフィギュア
-      </div>
-
-    </div>
-
-
-    <div
-      class="figure-grid"
-      id="figureGrid">
-    </div>
-
-  </section>
+<div class="notice">
+このサイトでは成人向けフィギュアを扱います。
+閲覧・利用にあたっては、利用者の居住地域および
+各サービスの利用規約に従ってください。
+</div>
 
 </main>
 
+<div id="modal" class="modal">
 
-<!-- =========================
-     FIGURE MODAL
-========================= -->
+<div class="modal-box">
 
-<div
-  class="modal"
-  id="figureModal">
+<div class="modal-head">
+<b>FIGURE</b>
+<button class="close" onclick="closeModal()">×</button>
+</div>
 
-  <div class="modal-content">
+<div class="detail">
 
-    <div class="modal-top">
+<div class="detail-image">
+NO IMAGE
+</div>
 
-      <strong>FIGURE</strong>
+<div class="detail-info">
 
-      <button
-        class="modal-close"
-        id="closeButton"
-        aria-label="閉じる">
-        ×
-      </button>
+<h2 id="d-name"></h2>
 
-    </div>
+<div class="row">
+<b>メーカー</b>
+<span id="d-maker"></span>
+</div>
 
+<div class="row">
+<b>作品</b>
+<span id="d-series"></span>
+</div>
 
-    <div class="modal-body">
+<div class="row">
+<b>キャラクター</b>
+<span id="d-character"></span>
+</div>
 
-      <div
-        class="modal-image"
-        id="modalImage">
-      </div>
-
-
-      <div class="modal-info">
-
-        <div
-          class="modal-maker"
-          id="modalMaker">
-        </div>
-
-        <div
-          class="modal-title"
-          id="modalTitle">
-        </div>
-
-
-        <div class="ownership">
-
-          <div
-            class="ownership-number"
-            id="modalOwners">
-            0
-          </div>
-
-          <div class="ownership-label">
-            PEOPLE OWN THIS FIGURE
-          </div>
-
-        </div>
-
-
-        <button
-          class="own-button"
-          id="ownButton">
-
-          ＋ このフィギュアを所有する
-
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <section class="photos-section">
-
-      <div class="sub-title">
-        📷 OWNERS' PHOTOS
-      </div>
-
-      <div
-        class="photo-grid"
-        id="photoGrid">
-      </div>
-
-    </section>
-
-
-    <section class="owners-section">
-
-      <div class="sub-title">
-        👥 OWNERS
-      </div>
-
-      <div
-        class="owner-list"
-        id="ownerList">
-      </div>
-
-    </section>
-
-  </div>
+<div class="row">
+<b>スケール</b>
+<span id="d-scale"></span>
+</div>
 
 </div>
 
+</div>
+
+</div>
+
+</div>
 
 <script>
 
-  /* =========================
-     FIGURE DATA
-  ========================= */
+const figures=[
 
-  const figures = [
-
-    {
-      id: "miku-001",
-      name: "初音ミク 1/7",
-      maker: "GOOD SMILE COMPANY",
-      owners: 128,
+{
+ name:"サンプルフィギュア A",
+ maker:"メーカー名",
+ series:"作品名",
+ character:"キャラクター名",
+ scale:"1/7"
+},
 
-      image: "",
+{
+ name:"サンプルフィギュア B",
+ maker:"メーカー名",
+ series:"作品名",
+ character:"キャラクター名",
+ scale:"1/6"
+},
 
-      photos: [
-        "",
-        "",
-        "",
-        ""
-      ],
+{
+ name:"サンプルフィギュア C",
+ maker:"メーカー名",
+ series:"作品名",
+ character:"キャラクター名",
+ scale:"1/4"
+}
 
-      ownerNames: [
-        "Aさん",
-        "Bさん",
-        "Cさん",
-        "Dさん",
-        "Eさん",
-        "Fさん",
-        "Gさん",
-        "Hさん"
-      ]
-    },
+];
 
+const grid=document.getElementById("grid");
 
-    {
-      id: "rei-001",
-      name: "綾波レイ",
-      maker: "ALTER",
-      owners: 74,
+figures.forEach((f,i)=>{
 
-      image: "",
+ const card=document.createElement("div");
 
-      photos: [
-        "",
-        "",
-        "",
-        ""
-      ],
+ card.className="card";
 
-      ownerNames: [
-        "Mさん",
-        "Nさん",
-        "Kさん",
-        "Yさん",
-        "Sさん"
-      ]
-    },
+ card.innerHTML=`
+ <div class="image">NO IMAGE</div>
+ <div class="info">
+   <div class="maker">${f.maker}</div>
+   <div class="name">${f.name}</div>
+   <div class="meta">${f.series}</div>
+ </div>
+ `;
 
+ card.onclick=()=>openModal(i);
 
-    {
-      id: "gojo-001",
-      name: "五条悟",
-      maker: "MAPPA",
-      owners: 91,
+ grid.appendChild(card);
 
-      image: "",
+});
 
-      photos: [
-        "",
-        "",
-        "",
-        ""
-      ],
+function openModal(i){
 
-      ownerNames: [
-        "Tさん",
-        "Rさん",
-        "Hさん",
-        "Aさん",
-        "Jさん"
-      ]
-    }
+ const f=figures[i];
 
-  ];
+ document.getElementById("d-name").textContent=f.name;
+ document.getElementById("d-maker").textContent=f.maker;
+ document.getElementById("d-series").textContent=f.series;
+ document.getElementById("d-character").textContent=f.character;
+ document.getElementById("d-scale").textContent=f.scale;
 
+ document.getElementById("modal")
+ .classList.add("show");
+}
 
-  let selectedFigure = null;
+function closeModal(){
 
+ document.getElementById("modal")
+ .classList.remove("show");
 
-  /* =========================
-     FIGURE LIST
-  ========================= */
-
-  function renderFigures() {
-
-    const grid =
-      document.getElementById("figureGrid");
-
-    grid.innerHTML = "";
-
-
-    figures.forEach(function(figure) {
-
-      const card =
-        document.createElement("article");
-
-      card.className = "figure-card";
-
-
-      card.addEventListener(
-        "click",
-        function() {
-          openFigure(figure.id);
-        }
-      );
-
-
-      let imageHTML;
-
-      if (figure.image) {
-
-        imageHTML = `
-          <img
-            src="${figure.image}"
-            alt="${figure.name}">
-        `;
-
-      } else {
-
-        imageHTML = `
-          <div class="placeholder">
-            FIGURE IMAGE
-          </div>
-        `;
-
-      }
-
-
-      card.innerHTML = `
-
-        <div class="figure-image">
-          ${imageHTML}
-        </div>
-
-        <div class="figure-info">
-
-          <div class="figure-maker">
-            ${figure.maker}
-          </div>
-
-          <div class="figure-name">
-            ${figure.name}
-          </div>
-
-          <div class="figure-stats">
-
-            <span>
-              👥 ${figure.owners}
-            </span>
-
-            <span>
-              📷 ${figure.photos.length}
-            </span>
-
-          </div>
-
-        </div>
-
-      `;
-
-
-      grid.appendChild(card);
-
-    });
-
-  }
-
-
-  /* =========================
-     OPEN FIGURE
-  ========================= */
-
-  function openFigure(id) {
-
-    selectedFigure =
-      figures.find(function(figure) {
-        return figure.id === id;
-      });
-
-
-    if (!selectedFigure) {
-      return;
-    }
-
-
-    document.getElementById(
-      "modalTitle"
-    ).textContent =
-      selectedFigure.name;
-
-
-    document.getElementById(
-      "modalMaker"
-    ).textContent =
-      selectedFigure.maker;
-
-
-    document.getElementById(
-      "modalOwners"
-    ).textContent =
-      selectedFigure.owners;
-
-
-    /* MAIN IMAGE */
-
-    const modalImage =
-      document.getElementById("modalImage");
-
-
-    if (selectedFigure.image) {
-
-      modalImage.innerHTML = `
-        <img
-          src="${selectedFigure.image}"
-          alt="${selectedFigure.name}">
-      `;
-
-    } else {
-
-      modalImage.innerHTML = `
-        <div class="placeholder">
-          FIGURE IMAGE
-        </div>
-      `;
-
-    }
-
-
-    /* PHOTOS */
-
-    const photoGrid =
-      document.getElementById("photoGrid");
-
-    photoGrid.innerHTML = "";
-
-
-    selectedFigure.photos.forEach(
-      function(photo, index) {
-
-        const element =
-          document.createElement("div");
-
-        element.className = "photo";
-
-
-        if (photo) {
-
-          element.innerHTML = `
-            <img
-              src="${photo}"
-              alt="Owner photo">
-          `;
-
-        } else {
-
-          element.innerHTML = `
-            <div class="photo-placeholder">
-              OWNER PHOTO<br>
-              ${index + 1}
-            </div>
-          `;
-
-        }
-
-
-        photoGrid.appendChild(element);
-
-      }
-    );
-
-
-    /* OWNERS */
-
-    const ownerList =
-      document.getElementById("ownerList");
-
-    ownerList.innerHTML = "";
-
-
-    selectedFigure.ownerNames.forEach(
-      function(name) {
-
-        const owner =
-          document.createElement("div");
-
-        owner.className = "owner";
-
-        owner.textContent = name;
-
-        ownerList.appendChild(owner);
-
-      }
-    );
-
-
-    /* BUTTON */
-
-    const button =
-      document.getElementById("ownButton");
-
-    button.classList.remove("owned");
-
-    button.textContent =
-      "＋ このフィギュアを所有する";
-
-
-    /* OPEN MODAL */
-
-    document
-      .getElementById("figureModal")
-      .classList.add("active");
-
-  }
-
-
-  /* =========================
-     CLOSE FIGURE
-  ========================= */
-
-  function closeFigure() {
-
-    document
-      .getElementById("figureModal")
-      .classList.remove("active");
-
-  }
-
-
-  /* =========================
-     OWNERSHIP
-  ========================= */
-
-  function toggleOwnership() {
-
-    if (!selectedFigure) {
-      return;
-    }
-
-
-    const button =
-      document.getElementById("ownButton");
-
-
-    const alreadyOwned =
-      button.classList.contains("owned");
-
-
-    if (alreadyOwned) {
-
-      selectedFigure.owners--;
-
-      button.classList.remove("owned");
-
-      button.textContent =
-        "＋ このフィギュアを所有する";
-
-    } else {
-
-      selectedFigure.owners++;
-
-      button.classList.add("owned");
-
-      button.textContent =
-        "✓ あなたも所有しています";
-
-    }
-
-
-    document.getElementById(
-      "modalOwners"
-    ).textContent =
-      selectedFigure.owners;
-
-
-    /*
-     * トップのカードも更新
-     */
-
-    renderFigures();
-
-  }
-
-
-  /* =========================
-     BUTTON EVENTS
-  ========================= */
-
-  document
-    .getElementById("closeButton")
-    .addEventListener(
-      "click",
-      closeFigure
-    );
-
-
-  document
-    .getElementById("ownButton")
-    .addEventListener(
-      "click",
-      toggleOwnership
-    );
-
-
-  document
-    .getElementById("figureModal")
-    .addEventListener(
-      "click",
-      function(event) {
-
-        if (
-          event.target === this
-        ) {
-          closeFigure();
-        }
-
-      }
-    );
-
-
-  /* =========================
-     START
-  ========================= */
-
-  renderFigures();
+}
 
 </script>
 
 </body>
 </html>
+
