@@ -11,6 +11,10 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       background: #f5f5f0;
@@ -41,8 +45,7 @@
       top: 0;
       z-index: 100;
       background: #111;
-      color: white;
-      border-bottom: 3px solid #111;
+      color: #fff;
     }
 
     .header-inner {
@@ -66,13 +69,13 @@
 
     nav {
       display: flex;
-      gap: 20px;
-      font-size: 13px;
-      font-weight: 700;
+      gap: 22px;
+      font-size: 12px;
+      font-weight: 800;
     }
 
     nav a {
-      opacity: .8;
+      opacity: .75;
     }
 
     nav a:hover {
@@ -86,26 +89,25 @@
     main {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 60px 24px 100px;
+      padding: 70px 24px 100px;
     }
 
     .hero {
-      margin-bottom: 70px;
+      margin-bottom: 80px;
     }
 
     .hero-label {
       font-size: 12px;
       font-weight: 900;
       letter-spacing: 2px;
-      margin-bottom: 15px;
+      margin-bottom: 18px;
     }
 
     .hero h1 {
-      font-size: clamp(42px, 8vw, 90px);
-      line-height: .9;
+      margin: 0 0 28px;
+      font-size: clamp(48px, 8vw, 92px);
+      line-height: .88;
       letter-spacing: -5px;
-      margin: 0 0 25px;
-      max-width: 850px;
     }
 
     .hero h1 span {
@@ -113,10 +115,10 @@
     }
 
     .hero p {
-      max-width: 600px;
-      font-size: 17px;
-      line-height: 1.7;
+      max-width: 620px;
       margin: 0;
+      font-size: 17px;
+      line-height: 1.8;
     }
 
     /* =========================
@@ -126,7 +128,7 @@
     .section-header {
       display: flex;
       justify-content: space-between;
-      align-items: end;
+      align-items: flex-end;
       border-top: 3px solid #111;
       padding-top: 15px;
       margin-bottom: 25px;
@@ -139,8 +141,8 @@
     }
 
     .section-subtitle {
-      font-size: 12px;
       color: #666;
+      font-size: 12px;
     }
 
     /* =========================
@@ -154,7 +156,7 @@
     }
 
     .figure-card {
-      background: white;
+      background: #fff;
       border: 2px solid #111;
       cursor: pointer;
       transition:
@@ -169,10 +171,10 @@
 
     .figure-image {
       aspect-ratio: 1 / 1;
-      background: #e8e8e3;
+      background: #e5e5e0;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       overflow: hidden;
     }
 
@@ -183,10 +185,10 @@
     }
 
     .placeholder {
-      font-size: 13px;
-      color: #777;
-      text-align: center;
       padding: 20px;
+      color: #777;
+      font-size: 12px;
+      text-align: center;
     }
 
     .figure-info {
@@ -195,25 +197,25 @@
     }
 
     .figure-maker {
-      font-size: 11px;
-      font-weight: 800;
+      margin-bottom: 7px;
       color: #777;
-      margin-bottom: 6px;
+      font-size: 11px;
+      font-weight: 900;
       text-transform: uppercase;
     }
 
     .figure-name {
-      font-size: 20px;
+      margin-bottom: 16px;
+      font-size: 21px;
       font-weight: 900;
       letter-spacing: -1px;
-      margin-bottom: 16px;
     }
 
     .figure-stats {
       display: flex;
-      gap: 15px;
+      gap: 18px;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 800;
     }
 
     /* =========================
@@ -225,8 +227,8 @@
       position: fixed;
       inset: 0;
       z-index: 200;
-      background: rgba(0,0,0,.75);
-      padding: 30px;
+      padding: 25px;
+      background: rgba(0, 0, 0, .78);
       overflow-y: auto;
     }
 
@@ -236,7 +238,7 @@
 
     .modal-content {
       max-width: 1000px;
-      margin: 30px auto;
+      margin: 20px auto;
       background: #f5f5f0;
       border: 3px solid #111;
     }
@@ -245,17 +247,16 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 20px;
+      padding: 14px 20px;
+      background: #fff;
       border-bottom: 3px solid #111;
-      background: white;
     }
 
     .modal-close {
       border: 0;
       background: transparent;
-      font-size: 28px;
+      font-size: 30px;
       cursor: pointer;
-      line-height: 1;
     }
 
     .modal-body {
@@ -267,8 +268,9 @@
       min-height: 500px;
       background: #ddd;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      overflow: hidden;
     }
 
     .modal-image img {
@@ -283,54 +285,57 @@
     }
 
     .modal-maker {
+      margin-bottom: 10px;
+      color: #777;
       font-size: 12px;
       font-weight: 900;
-      color: #777;
-      margin-bottom: 10px;
     }
 
     .modal-title {
-      font-size: 40px;
+      margin-bottom: 30px;
+      font-size: 42px;
       line-height: 1;
-      letter-spacing: -2px;
       font-weight: 900;
-      margin-bottom: 25px;
+      letter-spacing: -2px;
     }
 
+    /* =========================
+       OWNERSHIP
+    ========================= */
+
     .ownership {
-      background: #111;
-      color: white;
-      padding: 20px;
       margin-bottom: 20px;
+      padding: 20px;
+      background: #111;
+      color: #fff;
     }
 
     .ownership-number {
-      font-size: 42px;
-      font-weight: 900;
-      line-height: 1;
       margin-bottom: 5px;
+      font-size: 44px;
+      line-height: 1;
+      font-weight: 900;
     }
 
     .ownership-label {
-      font-size: 12px;
-      opacity: .7;
+      color: #aaa;
+      font-size: 11px;
+      font-weight: 700;
     }
 
     .own-button {
       width: 100%;
+      padding: 17px;
       border: 3px solid #111;
       background: #ff3b30;
-      color: white;
-      padding: 17px;
-      font-size: 16px;
+      color: #fff;
+      font-size: 15px;
       font-weight: 900;
       cursor: pointer;
-      transition: .15s;
     }
 
     .own-button:hover {
       background: #111;
-      color: white;
     }
 
     .own-button.owned {
@@ -341,15 +346,16 @@
        PHOTOS
     ========================= */
 
-    .photos-section {
-      border-top: 3px solid #111;
+    .photos-section,
+    .owners-section {
       padding: 25px;
+      border-top: 3px solid #111;
     }
 
-    .photos-title {
+    .sub-title {
+      margin-bottom: 18px;
       font-size: 14px;
       font-weight: 900;
-      margin-bottom: 18px;
     }
 
     .photo-grid {
@@ -359,7 +365,7 @@
     }
 
     .photo {
-      aspect-ratio: 1;
+      aspect-ratio: 1 / 1;
       background: #ddd;
       overflow: hidden;
     }
@@ -379,23 +385,11 @@
       color: #777;
       font-size: 11px;
       text-align: center;
-      padding: 10px;
     }
 
     /* =========================
        OWNERS
     ========================= */
-
-    .owners {
-      border-top: 3px solid #111;
-      padding: 25px;
-    }
-
-    .owners-title {
-      font-size: 14px;
-      font-weight: 900;
-      margin-bottom: 18px;
-    }
 
     .owner-list {
       display: flex;
@@ -404,9 +398,9 @@
     }
 
     .owner {
-      border: 2px solid #111;
-      background: white;
       padding: 10px 14px;
+      background: #fff;
+      border: 2px solid #111;
       font-size: 12px;
       font-weight: 800;
     }
@@ -418,7 +412,7 @@
     @media (max-width: 800px) {
 
       main {
-        padding: 40px 15px 70px;
+        padding: 45px 15px 70px;
       }
 
       .header-inner {
@@ -427,10 +421,6 @@
 
       nav {
         gap: 10px;
-      }
-
-      .hero h1 {
-        letter-spacing: -3px;
       }
 
       .figure-grid {
@@ -456,12 +446,16 @@
 
     @media (max-width: 500px) {
 
+      nav a:nth-child(2) {
+        display: none;
+      }
+
       .figure-grid {
         grid-template-columns: 1fr;
       }
 
-      nav a:nth-child(2) {
-        display: none;
+      .hero h1 {
+        letter-spacing: -3px;
       }
 
       .modal-title {
@@ -474,6 +468,7 @@
 <body>
 
 <header>
+
   <div class="header-inner">
 
     <div class="logo">
@@ -487,6 +482,7 @@
     </nav>
 
   </div>
+
 </header>
 
 
@@ -516,6 +512,7 @@
   <section>
 
     <div class="section-header">
+
       <div class="section-title">
         PICK UP FIGURES
       </div>
@@ -523,10 +520,14 @@
       <div class="section-subtitle">
         みんなが所有しているフィギュア
       </div>
+
     </div>
 
 
-    <div class="figure-grid" id="figureGrid"></div>
+    <div
+      class="figure-grid"
+      id="figureGrid">
+    </div>
 
   </section>
 
@@ -537,7 +538,9 @@
      FIGURE MODAL
 ========================= -->
 
-<div class="modal" id="figureModal">
+<div
+  class="modal"
+  id="figureModal">
 
   <div class="modal-content">
 
@@ -547,7 +550,8 @@
 
       <button
         class="modal-close"
-        onclick="closeFigure()">
+        id="closeButton"
+        aria-label="閉じる">
         ×
       </button>
 
@@ -556,7 +560,9 @@
 
     <div class="modal-body">
 
-      <div class="modal-image" id="modalImage">
+      <div
+        class="modal-image"
+        id="modalImage">
       </div>
 
 
@@ -590,8 +596,7 @@
 
         <button
           class="own-button"
-          id="ownButton"
-          onclick="toggleOwnership()">
+          id="ownButton">
 
           ＋ このフィギュアを所有する
 
@@ -604,7 +609,7 @@
 
     <section class="photos-section">
 
-      <div class="photos-title">
+      <div class="sub-title">
         📷 OWNERS' PHOTOS
       </div>
 
@@ -616,9 +621,9 @@
     </section>
 
 
-    <section class="owners">
+    <section class="owners-section">
 
-      <div class="owners-title">
+      <div class="sub-title">
         👥 OWNERS
       </div>
 
@@ -636,24 +641,16 @@
 
 <script>
 
-  /*
-   * ============================
-   * FIGURE DATA
-   * ============================
-   *
-   * 現段階ではダミーデータ。
-   * 後でデータベースに置き換える。
-   */
+  /* =========================
+     FIGURE DATA
+  ========================= */
 
   const figures = [
 
     {
       id: "miku-001",
-
       name: "初音ミク 1/7",
-
       maker: "GOOD SMILE COMPANY",
-
       owners: 128,
 
       image: "",
@@ -680,11 +677,8 @@
 
     {
       id: "rei-001",
-
       name: "綾波レイ",
-
       maker: "ALTER",
-
       owners: 74,
 
       image: "",
@@ -708,11 +702,8 @@
 
     {
       id: "gojo-001",
-
       name: "五条悟",
-
       maker: "MAPPA",
-
       owners: 91,
 
       image: "",
@@ -739,11 +730,9 @@
   let selectedFigure = null;
 
 
-  /*
-   * ============================
-   * RENDER FIGURES
-   * ============================
-   */
+  /* =========================
+     FIGURE LIST
+  ========================= */
 
   function renderFigures() {
 
@@ -752,27 +741,42 @@
 
     grid.innerHTML = "";
 
-    figures.forEach(figure => {
+
+    figures.forEach(function(figure) {
 
       const card =
         document.createElement("article");
 
       card.className = "figure-card";
 
-      card.onclick = () =>
-        openFigure(figure.id);
+
+      card.addEventListener(
+        "click",
+        function() {
+          openFigure(figure.id);
+        }
+      );
 
 
-      const imageHTML =
-        figure.image
+      let imageHTML;
 
-          ? `<img
-              src="${figure.image}"
-              alt="${figure.name}">`
+      if (figure.image) {
 
-          : `<div class="placeholder">
-              FIGURE IMAGE
-             </div>`;
+        imageHTML = `
+          <img
+            src="${figure.image}"
+            alt="${figure.name}">
+        `;
+
+      } else {
+
+        imageHTML = `
+          <div class="placeholder">
+            FIGURE IMAGE
+          </div>
+        `;
+
+      }
 
 
       card.innerHTML = `
@@ -807,6 +811,7 @@
 
       `;
 
+
       grid.appendChild(card);
 
     });
@@ -814,20 +819,21 @@
   }
 
 
-  /*
-   * ============================
-   * OPEN FIGURE
-   * ============================
-   */
+  /* =========================
+     OPEN FIGURE
+  ========================= */
 
   function openFigure(id) {
 
     selectedFigure =
-      figures.find(
-        figure => figure.id === id
-      );
+      figures.find(function(figure) {
+        return figure.id === id;
+      });
 
-    if (!selectedFigure) return;
+
+    if (!selectedFigure) {
+      return;
+    }
 
 
     document.getElementById(
@@ -848,9 +854,7 @@
       selectedFigure.owners;
 
 
-    /*
-     * MAIN IMAGE
-     */
+    /* MAIN IMAGE */
 
     const modalImage =
       document.getElementById("modalImage");
@@ -875,9 +879,7 @@
     }
 
 
-    /*
-     * PHOTOS
-     */
+    /* PHOTOS */
 
     const photoGrid =
       document.getElementById("photoGrid");
@@ -886,7 +888,7 @@
 
 
     selectedFigure.photos.forEach(
-      (photo, index) => {
+      function(photo, index) {
 
         const element =
           document.createElement("div");
@@ -920,9 +922,7 @@
     );
 
 
-    /*
-     * OWNERS
-     */
+    /* OWNERS */
 
     const ownerList =
       document.getElementById("ownerList");
@@ -931,7 +931,7 @@
 
 
     selectedFigure.ownerNames.forEach(
-      name => {
+      function(name) {
 
         const owner =
           document.createElement("div");
@@ -946,9 +946,7 @@
     );
 
 
-    /*
-     * RESET BUTTON
-     */
+    /* BUTTON */
 
     const button =
       document.getElementById("ownButton");
@@ -959,9 +957,7 @@
       "＋ このフィギュアを所有する";
 
 
-    /*
-     * OPEN
-     */
+    /* OPEN MODAL */
 
     document
       .getElementById("figureModal")
@@ -970,11 +966,9 @@
   }
 
 
-  /*
-   * ============================
-   * CLOSE
-   * ============================
-   */
+  /* =========================
+     CLOSE FIGURE
+  ========================= */
 
   function closeFigure() {
 
@@ -985,20 +979,15 @@
   }
 
 
-  /*
-   * ============================
-   * OWNERSHIP
-   * ============================
-   *
-   * 現段階ではブラウザ上だけで
-   * 所有状態を変更する。
-   *
-   * 後でログイン + DBに変更する。
-   */
+  /* =========================
+     OWNERSHIP
+  ========================= */
 
   function toggleOwnership() {
 
-    if (!selectedFigure) return;
+    if (!selectedFigure) {
+      return;
+    }
 
 
     const button =
@@ -1035,21 +1024,35 @@
     ).textContent =
       selectedFigure.owners;
 
+
+    /*
+     * トップのカードも更新
+     */
+
+    renderFigures();
+
   }
 
 
-  /*
-   * ============================
-   * INITIALIZE
-   * ============================
-   */
+  /* =========================
+     BUTTON EVENTS
+  ========================= */
 
-  renderFigures();
+  document
+    .getElementById("closeButton")
+    .addEventListener(
+      "click",
+      closeFigure
+    );
 
 
-  /*
-   * モーダル外クリックで閉じる
-   */
+  document
+    .getElementById("ownButton")
+    .addEventListener(
+      "click",
+      toggleOwnership
+    );
+
 
   document
     .getElementById("figureModal")
@@ -1067,20 +1070,14 @@
     );
 
 
-<script>
-
-  // ここまでに既存のJavaScript
+  /* =========================
+     START
+  ========================= */
 
   renderFigures();
 
-  document
-    .getElementById("figureModal")
-    .addEventListener("click", function(event) {
-      if (event.target === this) {
-        closeFigure();
-      }
-    });
-
 </script>
+
 </body>
 </html>
+
