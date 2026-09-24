@@ -1066,7 +1066,21 @@
       }
     );
 
-</script>
 
+<script>
+
+  // ここまでに既存のJavaScript
+
+  renderFigures();
+
+  document
+    .getElementById("figureModal")
+    .addEventListener("click", function(event) {
+      if (event.target === this) {
+        closeFigure();
+      }
+    });
+
+</script>
 </body>
 </html>
