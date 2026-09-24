@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>FIGURE SHELF</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f5f5f0;
+      color: #111;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #111;
+      color: white;
+      border-bottom: 3px solid #111;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: #ff3b30;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    nav a {
+      opacity: .8;
+    }
+
+    nav a:hover {
+      opacity: 1;
+    }
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
+    }
+
+    .hero {
+      margin-bottom: 70px;
+    }
+
+    .hero-label {
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 8vw, 90px);
+      line-height: .9;
+      letter-spacing: -5px;
+      margin: 0 0 25px;
+      max-width: 850px;
+    }
+
+    .hero h1 span {
+      color: #ff3b30;
+    }
+
+    .hero p {
+      max-width: 600px;
+      font-size: 17px;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* =========================
+       SECTION
+    ========================= */
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      border-top: 3px solid #111;
+      padding-top: 15px;
+      margin-bottom: 25px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .section-subtitle {
+      font-size: 12px;
+      color: #666;
+    }
+
+    /* =========================
+       FIGURE GRID
+    ========================= */
+
+    .figure-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .figure-card {
+      background: white;
+      border: 2px solid #111;
+      cursor: pointer;
+      transition:
+        transform .15s ease,
+        box-shadow .15s ease;
+    }
+
+    .figure-card:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 6px 6px 0 #111;
+    }
+
+    .figure-image {
+      aspect-ratio: 1 / 1;
+      background: #e8e8e3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .figure-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .placeholder {
+      font-size: 13px;
+      color: #777;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .figure-info {
+      padding: 18px;
+      border-top: 2px solid #111;
+    }
+
+    .figure-maker {
+      font-size: 11px;
+      font-weight: 800;
+      color: #777;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .figure-name {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+
+    .figure-stats {
+      display: flex;
+      gap: 15px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* =========================
+       MODAL
+    ========================= */
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(0,0,0,.75);
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .modal.active {
+      display: block;
+    }
+
+    .modal-content {
+      max-width: 1000px;
+      margin: 30px auto;
+      background: #f5f5f0;
+      border: 3px solid #111;
+    }
+
+    .modal-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      border-bottom: 3px solid #111;
+      background: white;
+    }
+
+    .modal-close {
+      border: 0;
+      background: transparent;
+      font-size: 28px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .modal-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .modal-image {
+      min-height: 500px;
+      background: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-image img {
+      width: 100%;
+      height: 100%;
+      max-height: 600px;
+      object-fit: cover;
+    }
+
+    .modal-info {
+      padding: 35px;
+    }
+
+    .modal-maker {
+      font-size: 12px;
+      font-weight: 900;
+      color: #777;
+      margin-bottom: 10px;
+    }
+
+    .modal-title {
+      font-size: 40px;
+      line-height: 1;
+      letter-spacing: -2px;
+      font-weight: 900;
+      margin-bottom: 25px;
+    }
+
+    .ownership {
+      background: #111;
+      color: white;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .ownership-number {
+      font-size: 42px;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+
+    .ownership-label {
+      font-size: 12px;
+      opacity: .7;
+    }
+
+    .own-button {
+      width: 100%;
+      border: 3px solid #111;
+      background: #ff3b30;
+      color: white;
+      padding: 17px;
+      font-size: 16px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: .15s;
+    }
+
+    .own-button:hover {
+      background: #111;
+      color: white;
+    }
+
+    .own-button.owned {
+      background: #111;
+    }
+
+    /* =========================
+       PHOTOS
+    ========================= */
+
+    .photos-section {
+      border-top: 3px solid #111;
+      padding: 25px;
+    }
+
+    .photos-title {
+      font-size: 14px;
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .photo {
+      aspect-ratio: 1;
+      background: #ddd;
+      overflow: hidden;
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #777;
+      font-size: 11px;
+      text-align: center;
+      padding: 10px;
+    }
+
+    /* =========================
+       OWNERS
+    ========================= */
+
+    .owners {
+      border-top: 3px solid #111;
+      padding: 25px;
+    }
+
+    .owners-title {
+      font-size: 14px;
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .owner-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .owner {
+      border: 2px solid #111;
+      background: white;
+      padding: 10px 14px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 800px) {
+
+      main {
+        padding: 40px 15px 70px;
+      }
+
+      .header-inner {
+        padding: 15px;
+      }
+
+      nav {
+        gap: 10px;
+      }
+
+      .hero h1 {
+        letter-spacing: -3px;
+      }
+
+      .figure-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .modal {
+        padding: 10px;
+      }
+
+      .modal-body {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-image {
+        min-height: 350px;
+      }
+
+      .photo-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 500px) {
+
+      .figure-grid {
+        grid-template-columns: 1fr;
+      }
+
+      nav a:nth-child(2) {
+        display: none;
+      }
+
+      .modal-title {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+
+    <div class="logo">
+      FIGURE<span>SHELF</span>
+    </div>
+
+    <nav>
+      <a href="#">FIGURES</a>
+      <a href="#">OWNERS</a>
+      <a href="#">MY SHELF</a>
+    </nav>
+
+  </div>
+</header>
+
+
+<main>
+
+  <section class="hero">
+
+    <div class="hero-label">
+      A SHARED COLLECTION
+    </div>
+
+    <h1>
+      ONE FIGURE.<br>
+      <span>MANY OWNERS.</span>
+    </h1>
+
+    <p>
+      同じフィギュアを持っている人たちで、
+      写真や記録を共有する。
+      FIGURE SHELFは、フィギュアを中心にした
+      ネット上の共同コレクションです。
+    </p>
+
+  </section>
+
+
+  <section>
+
+    <div class="section-header">
+      <div class="section-title">
+        PICK UP FIGURES
+      </div>
+
+      <div class="section-subtitle">
+        みんなが所有しているフィギュア
+      </div>
+    </div>
+
+
+    <div class="figure-grid" id="figureGrid"></div>
+
+  </section>
+
+</main>
+
+
+<!-- =========================
+     FIGURE MODAL
+========================= -->
+
+<div class="modal" id="figureModal">
+
+  <div class="modal-content">
+
+    <div class="modal-top">
+
+      <strong>FIGURE</strong>
+
+      <button
+        class="modal-close"
+        onclick="closeFigure()">
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modal-body">
+
+      <div class="modal-image" id="modalImage">
+      </div>
+
+
+      <div class="modal-info">
+
+        <div
+          class="modal-maker"
+          id="modalMaker">
+        </div>
+
+        <div
+          class="modal-title"
+          id="modalTitle">
+        </div>
+
+
+        <div class="ownership">
+
+          <div
+            class="ownership-number"
+            id="modalOwners">
+            0
+          </div>
+
+          <div class="ownership-label">
+            PEOPLE OWN THIS FIGURE
+          </div>
+
+        </div>
+
+
+        <button
+          class="own-button"
+          id="ownButton"
+          onclick="toggleOwnership()">
+
+          ＋ このフィギュアを所有する
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <section class="photos-section">
+
+      <div class="photos-title">
+        📷 OWNERS' PHOTOS
+      </div>
+
+      <div
+        class="photo-grid"
+        id="photoGrid">
+      </div>
+
+    </section>
+
+
+    <section class="owners">
+
+      <div class="owners-title">
+        👥 OWNERS
+      </div>
+
+      <div
+        class="owner-list"
+        id="ownerList">
+      </div>
+
+    </section>
+
+  </div>
+
+</div>
+
+
+<script>
+
+  /*
+   * ============================
+   * FIGURE DATA
+   * ============================
+   *
+   * 現段階ではダミーデータ。
+   * 後でデータベースに置き換える。
+   */
+
+  const figures = [
+
+    {
+      id: "miku-001",
+
+      name: "初音ミク 1/7",
+
+      maker: "GOOD SMILE COMPANY",
+
+      owners: 128,
+
+      image: "",
+
+      photos: [
+        "",
+        "",
+        "",
+        ""
+      ],
+
+      ownerNames: [
+        "Aさん",
+        "Bさん",
+        "Cさん",
+        "Dさん",
+        "Eさん",
+        "Fさん",
+        "Gさん",
+        "Hさん"
+      ]
+    },
+
+
+    {
+      id: "rei-001",
+
+      name: "綾波レイ",
+
+      maker: "ALTER",
+
+      owners: 74,
+
+      image: "",
+
+      photos: [
+        "",
+        "",
+        "",
+        ""
+      ],
+
+      ownerNames: [
+        "Mさん",
+        "Nさん",
+        "Kさん",
+        "Yさん",
+        "Sさん"
+      ]
+    },
+
+
+    {
+      id: "gojo-001",
+
+      name: "五条悟",
+
+      maker: "MAPPA",
+
+      owners: 91,
+
+      image: "",
+
+      photos: [
+        "",
+        "",
+        "",
+        ""
+      ],
+
+      ownerNames: [
+        "Tさん",
+        "Rさん",
+        "Hさん",
+        "Aさん",
+        "Jさん"
+      ]
+    }
+
+  ];
+
+
+  let selectedFigure = null;
+
+
+  /*
+   * ============================
+   * RENDER FIGURES
+   * ============================
+   */
+
+  function renderFigures() {
+
+    const grid =
+      document.getElementById("figureGrid");
+
+    grid.innerHTML = "";
+
+    figures.forEach(figure => {
+
+      const card =
+        document.createElement("article");
+
+      card.className = "figure-card";
+
+      card.onclick = () =>
+        openFigure(figure.id);
+
+
+      const imageHTML =
+        figure.image
+
+          ? `<img
+              src="${figure.image}"
+              alt="${figure.name}">`
+
+          : `<div class="placeholder">
+              FIGURE IMAGE
+             </div>`;
+
+
+      card.innerHTML = `
+
+        <div class="figure-image">
+          ${imageHTML}
+        </div>
+
+        <div class="figure-info">
+
+          <div class="figure-maker">
+            ${figure.maker}
+          </div>
+
+          <div class="figure-name">
+            ${figure.name}
+          </div>
+
+          <div class="figure-stats">
+
+            <span>
+              👥 ${figure.owners}
+            </span>
+
+            <span>
+              📷 ${figure.photos.length}
+            </span>
+
+          </div>
+
+        </div>
+
+      `;
+
+      grid.appendChild(card);
+
+    });
+
+  }
+
+
+  /*
+   * ============================
+   * OPEN FIGURE
+   * ============================
+   */
+
+  function openFigure(id) {
+
+    selectedFigure =
+      figures.find(
+        figure => figure.id === id
+      );
+
+    if (!selectedFigure) return;
+
+
+    document.getElementById(
+      "modalTitle"
+    ).textContent =
+      selectedFigure.name;
+
+
+    document.getElementById(
+      "modalMaker"
+    ).textContent =
+      selectedFigure.maker;
+
+
+    document.getElementById(
+      "modalOwners"
+    ).textContent =
+      selectedFigure.owners;
+
+
+    /*
+     * MAIN IMAGE
+     */
+
+    const modalImage =
+      document.getElementById("modalImage");
+
+
+    if (selectedFigure.image) {
+
+      modalImage.innerHTML = `
+        <img
+          src="${selectedFigure.image}"
+          alt="${selectedFigure.name}">
+      `;
+
+    } else {
+
+      modalImage.innerHTML = `
+        <div class="placeholder">
+          FIGURE IMAGE
+        </div>
+      `;
+
+    }
+
+
+    /*
+     * PHOTOS
+     */
+
+    const photoGrid =
+      document.getElementById("photoGrid");
+
+    photoGrid.innerHTML = "";
+
+
+    selectedFigure.photos.forEach(
+      (photo, index) => {
+
+        const element =
+          document.createElement("div");
+
+        element.className = "photo";
+
+
+        if (photo) {
+
+          element.innerHTML = `
+            <img
+              src="${photo}"
+              alt="Owner photo">
+          `;
+
+        } else {
+
+          element.innerHTML = `
+            <div class="photo-placeholder">
+              OWNER PHOTO<br>
+              ${index + 1}
+            </div>
+          `;
+
+        }
+
+
+        photoGrid.appendChild(element);
+
+      }
+    );
+
+
+    /*
+     * OWNERS
+     */
+
+    const ownerList =
+      document.getElementById("ownerList");
+
+    ownerList.innerHTML = "";
+
+
+    selectedFigure.ownerNames.forEach(
+      name => {
+
+        const owner =
+          document.createElement("div");
+
+        owner.className = "owner";
+
+        owner.textContent = name;
+
+        ownerList.appendChild(owner);
+
+      }
+    );
+
+
+    /*
+     * RESET BUTTON
+     */
+
+    const button =
+      document.getElementById("ownButton");
+
+    button.classList.remove("owned");
+
+    button.textContent =
+      "＋ このフィギュアを所有する";
+
+
+    /*
+     * OPEN
+     */
+
+    document
+      .getElementById("figureModal")
+      .classList.add("active");
+
+  }
+
+
+  /*
+   * ============================
+   * CLOSE
+   * ============================
+   */
+
+  function closeFigure() {
+
+    document
+      .getElementById("figureModal")
+      .classList.remove("active");
+
+  }
+
+
+  /*
+   * ============================
+   * OWNERSHIP
+   * ============================
+   *
+   * 現段階ではブラウザ上だけで
+   * 所有状態を変更する。
+   *
+   * 後でログイン + DBに変更する。
+   */
+
+  function toggleOwnership() {
+
+    if (!selectedFigure) return;
+
+
+    const button =
+      document.getElementById("ownButton");
+
+
+    const alreadyOwned =
+      button.classList.contains("owned");
+
+
+    if (alreadyOwned) {
+
+      selectedFigure.owners--;
+
+      button.classList.remove("owned");
+
+      button.textContent =
+        "＋ このフィギュアを所有する";
+
+    } else {
+
+      selectedFigure.owners++;
+
+      button.classList.add("owned");
+
+      button.textContent =
+        "✓ あなたも所有しています";
+
+    }
+
+
+    document.getElementById(
+      "modalOwners"
+    ).textContent =
+      selectedFigure.owners;
+
+  }
+
+
+  /*
+   * ============================
+   * INITIALIZE
+   * ============================
+   */
+
+  renderFigures();
+
+
+  /*
+   * モーダル外クリックで閉じる
+   */
+
+  document
+    .getElementById("figureModal")
+    .addEventListener(
+      "click",
+      function(event) {
+
+        if (
+          event.target === this
+        ) {
+          closeFigure();
+        }
+
+      }
+    );
+
+</script>
+
+</body>
+</html>
