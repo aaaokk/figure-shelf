@@ -2,325 +2,454 @@
 <html lang="ja">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
 
 <title>HENTAI FIGURE SHELF</title>
+
 
 <style>
 
 *{
-box-sizing:border-box;
+  box-sizing:border-box;
 }
 
 body{
-margin:0;
-background:#111;
-color:#eee;
-font-family:Arial,"Noto Sans JP",sans-serif;
+  margin:0;
+  background:#111;
+  color:#eee;
+  font-family:
+    Arial,
+    "Noto Sans JP",
+    sans-serif;
 }
 
 header{
-position:sticky;
-top:0;
-z-index:10;
-background:#090909;
-border-bottom:1px solid #333;
-padding:18px 24px;
+  position:sticky;
+  top:0;
+  z-index:10;
+
+  background:#090909;
+  border-bottom:1px solid #333;
+
+  padding:18px 24px;
 }
 
 .header{
-max-width:1200px;
-margin:auto;
-display:flex;
-justify-content:space-between;
-align-items:center;
+  max-width:1200px;
+  margin:auto;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
 .logo{
-font-size:22px;
-font-weight:900;
-letter-spacing:.08em;
+  font-size:22px;
+  font-weight:900;
+  letter-spacing:.08em;
 }
 
 .logo span{
-color:#e43b70;
+  color:#e43b70;
 }
 
 main{
-max-width:1200px;
-margin:auto;
-padding:55px 24px 100px;
+  max-width:1200px;
+  margin:auto;
+  padding:55px 24px 100px;
 }
 
 .hero{
-margin-bottom:60px;
+  margin-bottom:60px;
 }
 
 .hero small{
-color:#e43b70;
-font-weight:bold;
-letter-spacing:.15em;
+  color:#e43b70;
+  font-weight:bold;
+  letter-spacing:.15em;
 }
 
 .hero h1{
-font-size:clamp(42px,8vw,90px);
-line-height:.9;
-margin:15px 0;
+  font-size:clamp(42px,8vw,90px);
+  line-height:.9;
+  margin:15px 0;
 }
 
 .hero p{
-color:#aaa;
-line-height:1.8;
-max-width:650px;
+  color:#aaa;
+  line-height:1.8;
+  max-width:650px;
 }
 
 .section-title{
-border-top:2px solid #eee;
-padding-top:14px;
-margin-bottom:25px;
-font-weight:bold;
+  border-top:2px solid #eee;
+  padding-top:14px;
+  margin-bottom:25px;
+  font-weight:bold;
 }
 
 .grid{
-display:grid;
-grid-template-columns:
-repeat(auto-fill,minmax(220px,1fr));
-gap:18px;
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fill,
+      minmax(220px,1fr)
+    );
+
+  gap:18px;
 }
 
 .card{
-background:#1b1b1b;
-border:1px solid #333;
-cursor:pointer;
-transition:.2s;
+  background:#1b1b1b;
+  border:1px solid #333;
+  cursor:pointer;
+  transition:.2s;
 }
 
 .card:hover{
-transform:translateY(-4px);
-border-color:#e43b70;
+  transform:translateY(-4px);
+  border-color:#e43b70;
 }
 
 .image{
-aspect-ratio:1;
-background:#292929;
-display:flex;
-align-items:center;
-justify-content:center;
-color:#777;
+  aspect-ratio:1;
+
+  background:#292929;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  color:#777;
+
+  overflow:hidden;
+}
+
+.image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
 .info{
-padding:17px;
+  padding:17px;
 }
 
 .maker{
-color:#999;
-font-size:11px;
-margin-bottom:7px;
+  color:#999;
+  font-size:11px;
+  margin-bottom:7px;
 }
 
 .name{
-font-size:18px;
-font-weight:bold;
+  font-size:18px;
+  font-weight:bold;
 }
 
 .meta{
-margin-top:12px;
-color:#999;
-font-size:12px;
+  margin-top:12px;
+  color:#999;
+  font-size:12px;
 }
 
 .notice{
-margin-top:60px;
-padding:18px;
-border:1px solid #444;
-color:#999;
-font-size:12px;
-line-height:1.7;
+  margin-top:60px;
+  padding:18px;
+
+  border:1px solid #444;
+
+  color:#999;
+  font-size:12px;
+  line-height:1.7;
 }
 
-/* モーダル */
+
+/* =========================
+   詳細モーダル
+========================= */
 
 .modal{
-display:none;
-position:fixed;
-inset:0;
-z-index:100;
-background:#000c;
-padding:20px;
-overflow:auto;
+  display:none;
+
+  position:fixed;
+  inset:0;
+  z-index:100;
+
+  background:#000c;
+
+  padding:20px;
+
+  overflow:auto;
 }
 
 .modal.show{
-display:block;
+  display:block;
 }
 
 .modal-box{
-max-width:1000px;
-margin:30px auto;
-background:#181818;
-border:1px solid #444;
+  max-width:1000px;
+
+  margin:30px auto;
+
+  background:#181818;
+
+  border:1px solid #444;
 }
 
 .modal-head{
-display:flex;
-justify-content:space-between;
-padding:15px 20px;
-border-bottom:1px solid #333;
+  display:flex;
+
+  justify-content:space-between;
+  align-items:center;
+
+  padding:15px 20px;
+
+  border-bottom:1px solid #333;
 }
 
 .close{
-border:0;
-background:none;
-color:white;
-font-size:28px;
-cursor:pointer;
+  border:0;
+  background:none;
+
+  color:white;
+
+  font-size:28px;
+
+  cursor:pointer;
 }
 
 .detail{
-display:grid;
-grid-template-columns:1fr 1fr;
+  display:grid;
+  grid-template-columns:1fr 1fr;
 }
 
 .detail-image{
-min-height:450px;
-background:#292929;
-display:flex;
-align-items:center;
-justify-content:center;
-color:#777;
+  min-height:450px;
+
+  background:#292929;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  color:#777;
+
+  overflow:hidden;
+}
+
+.detail-image img{
+  width:100%;
+  height:100%;
+
+  max-height:600px;
+
+  object-fit:contain;
 }
 
 .detail-info{
-padding:35px;
+  padding:35px;
 }
 
 .detail-info h2{
-font-size:34px;
-margin-top:0;
+  font-size:34px;
+  margin-top:0;
 }
 
 .row{
-padding:14px 0;
-border-bottom:1px solid #333;
+  padding:14px 0;
+  border-bottom:1px solid #333;
 }
 
 .row b{
-display:inline-block;
-width:110px;
-color:#999;
+  display:inline-block;
+
+  width:110px;
+
+  color:#999;
 }
 
-/* 記憶 */
 
-.memories{
-border-top:1px solid #333;
-padding:30px;
+/* =========================
+   写真一覧
+========================= */
+
+.photos{
+  border-top:1px solid #333;
+  padding:30px;
 }
 
-.memories-title{
-font-size:12px;
-font-weight:bold;
-letter-spacing:.15em;
-color:#e43b70;
-margin-bottom:8px;
+.photos-title{
+  color:#e43b70;
+
+  font-size:12px;
+  font-weight:bold;
+
+  letter-spacing:.15em;
+
+  margin-bottom:8px;
 }
 
-.memories-heading{
-font-size:28px;
-font-weight:bold;
-margin-bottom:25px;
+.photos-heading{
+  font-size:28px;
+  font-weight:bold;
+
+  margin-bottom:25px;
 }
 
-.memory-grid{
-display:grid;
-grid-template-columns:
-repeat(auto-fill,minmax(180px,1fr));
-gap:15px;
+.photo-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fill,
+      minmax(180px,1fr)
+    );
+
+  gap:15px;
 }
 
-.memory{
-background:#222;
-border:1px solid #333;
+.photo-card{
+  background:#222;
+  border:1px solid #333;
+
+  cursor:pointer;
+
+  transition:.2s;
 }
 
-.memory-photo{
-aspect-ratio:1;
-background:#2b2b2b;
-display:flex;
-align-items:center;
-justify-content:center;
-color:#666;
-font-size:11px;
+.photo-card:hover{
+  border-color:#e43b70;
+  transform:translateY(-3px);
 }
 
-.memory-text{
-padding:14px;
-color:#ccc;
-font-size:13px;
-line-height:1.7;
+.photo-image{
+  aspect-ratio:1;
+
+  background:#2b2b2b;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  overflow:hidden;
+
+  color:#666;
 }
 
-.memory-date{
-margin-top:8px;
-font-size:10px;
-color:#777;
+.photo-image img{
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
 }
 
-.post-button{
-margin-top:25px;
-width:100%;
-padding:16px;
-border:1px solid #e43b70;
-background:#e43b70;
-color:white;
-font-weight:bold;
-cursor:pointer;
-font-size:14px;
+.photo-caption{
+  padding:12px;
+
+  color:#ccc;
+
+  font-size:13px;
+  line-height:1.5;
 }
 
-.post-button:hover{
-background:#c92f60;
+
+/* =========================
+   写真拡大
+========================= */
+
+.photo-viewer{
+  display:none;
+
+  position:fixed;
+  inset:0;
+
+  z-index:200;
+
+  background:#000e;
+
+  padding:30px;
+
+  align-items:center;
+  justify-content:center;
 }
 
-/* 投稿準備中 */
-
-.coming{
-display:none;
-padding:25px;
-border-top:1px solid #333;
-color:#aaa;
-line-height:1.8;
+.photo-viewer.show{
+  display:flex;
 }
 
-.coming.show{
-display:block;
+.photo-viewer img{
+  max-width:95vw;
+  max-height:90vh;
+
+  object-fit:contain;
 }
 
-.coming strong{
-color:#fff;
+.photo-close{
+  position:fixed;
+
+  top:15px;
+  right:25px;
+
+  border:0;
+  background:none;
+
+  color:white;
+
+  font-size:38px;
+
+  cursor:pointer;
 }
 
-/* スマホ */
+
+/* =========================
+   ローディング・エラー
+========================= */
+
+.message{
+  padding:40px 20px;
+
+  text-align:center;
+
+  color:#777;
+
+  border:1px solid #333;
+}
+
+
+/* =========================
+   スマホ
+========================= */
 
 @media(max-width:700px){
 
-.detail{
-grid-template-columns:1fr;
-}
+  .detail{
+    grid-template-columns:1fr;
+  }
 
-.detail-image{
-min-height:300px;
-}
+  .detail-image{
+    min-height:300px;
+  }
 
-.detail-info{
-padding:25px;
-}
+  .detail-info{
+    padding:25px;
+  }
 
-.memories{
-padding:25px;
-}
+  .photos{
+    padding:25px;
+  }
+
+  .photo-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
 
 }
 
@@ -331,172 +460,242 @@ padding:25px;
 
 <body>
 
+
 <header>
 
-<div class="header">
+  <div class="header">
 
-<div class="logo">
-HENTAI <span>FIGURE SHELF</span>
-</div>
+    <div class="logo">
+      HENTAI
+      <span>FIGURE SHELF</span>
+    </div>
 
-</div>
+  </div>
 
 </header>
 
 
 <main>
 
+
 <section class="hero">
 
-<small>ADULT FIGURE DATABASE</small>
+  <small>
+    ADULT FIGURE DATABASE
+  </small>
 
-<h1>
-HENTAI<br>
-FIGURE SHELF
-</h1>
+  <h1>
+    HENTAI<br>
+    FIGURE SHELF
+  </h1>
 
-<p>
-成人向けフィギュアを中心に、
-フィギュアそのものを主役として記録・共有するデータベース。
-</p>
+  <p>
+    成人向けフィギュアを中心に、
+    フィギュアそのものを主役として
+    記録・共有するデータベース。
+  </p>
 
 </section>
 
 
 <section>
 
-<div class="section-title">
-FIGURES
-</div>
+  <div class="section-title">
+    FIGURES
+  </div>
 
-<div id="grid" class="grid"></div>
+  <div
+    id="grid"
+    class="grid"
+  >
+
+    <div class="message">
+      FIGURES LOADING...
+    </div>
+
+  </div>
 
 </section>
 
 
 <div class="notice">
 
-このサイトでは成人向けフィギュアを扱います。
-閲覧・利用にあたっては、利用者の居住地域および
-各サービスの利用規約に従ってください。
+  このサイトでは成人向けフィギュアを扱います。<br>
+
+  閲覧・利用にあたっては、
+  利用者の居住地域および
+  各サービスの利用規約に従ってください。
 
 </div>
+
 
 </main>
 
 
-<!-- フィギュア詳細 -->
 
-<div id="modal" class="modal">
+<!-- =========================
+     フィギュア詳細
+========================= -->
 
-<div class="modal-box">
-
-
-<div class="modal-head">
-
-<b>FIGURE</b>
-
-<button class="close" onclick="closeModal()">×</button>
-
-</div>
-
-
-<div class="detail">
-
-
-<div class="detail-image" id="detail-image">
-
-NO IMAGE
-
-</div>
-
-
-<div class="detail-info">
-
-<h2 id="d-name"></h2>
-
-
-<div class="row">
-<b>メーカー</b>
-<span id="d-maker"></span>
-</div>
-
-
-<div class="row">
-<b>作品</b>
-<span id="d-series"></span>
-</div>
-
-
-<div class="row">
-<b>キャラクター</b>
-<span id="d-character"></span>
-</div>
-
-
-<div class="row">
-<b>スケール</b>
-<span id="d-scale"></span>
-</div>
-
-</div>
-
-</div>
-
-
-<!-- 記憶 -->
-
-<div class="memories">
-
-<div class="memories-title">
-MEMORIES
-</div>
-
-<div class="memories-heading">
-このフィギュアと過ごした記憶
-</div>
-
-
-<div id="memory-grid" class="memory-grid"></div>
-
-
-<button
-class="post-button"
-onclick="showComingSoon()"
+<div
+  id="modal"
+  class="modal"
 >
-このフィギュアの写真を投稿
-</button>
+
+  <div class="modal-box">
 
 
-<div id="coming" class="coming">
+    <div class="modal-head">
 
-<strong>写真投稿機能は準備中です。</strong><br>
+      <b>FIGURE</b>
 
-この場所では、同じフィギュアを持っている人が
-自分の写真や、そのフィギュアとの思い出を
-共有できるようにする予定です。
+      <button
+        class="close"
+        onclick="closeModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="detail">
+
+
+      <div
+        class="detail-image"
+        id="detail-image"
+      >
+        NO IMAGE
+      </div>
+
+
+      <div class="detail-info">
+
+        <h2 id="d-name"></h2>
+
+
+        <div class="row">
+
+          <b>メーカー</b>
+
+          <span id="d-maker"></span>
+
+        </div>
+
+
+        <div class="row">
+
+          <b>作品</b>
+
+          <span id="d-series"></span>
+
+        </div>
+
+
+        <div class="row">
+
+          <b>キャラクター</b>
+
+          <span id="d-character"></span>
+
+        </div>
+
+
+        <div class="row">
+
+          <b>スケール</b>
+
+          <span id="d-scale"></span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- 写真一覧 -->
+
+    <div class="photos">
+
+      <div class="photos-title">
+        PHOTOS
+      </div>
+
+      <div class="photos-heading">
+        このフィギュアの写真
+      </div>
+
+
+      <div
+        id="photo-grid"
+        class="photo-grid"
+      >
+
+        <div class="message">
+          PHOTO LOADING...
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
 
 </div>
 
+
+
+<!-- =========================
+     写真拡大
+========================= -->
+
+<div
+  id="photo-viewer"
+  class="photo-viewer"
+>
+
+  <button
+    class="photo-close"
+    onclick="closePhoto()"
+  >
+    ×
+  </button>
+
+
+  <img
+    id="viewer-image"
+    src=""
+    alt=""
+  >
+
 </div>
 
 
-</div>
 
-</div>
+<!-- =========================
+     Supabase
+========================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
 <script>
 
 
 /* =========================
-   フィギュアデータ
+   Supabase設定
 ========================= */
+
 const SUPABASE_URL =
   "https://voftbkqqkiwybnjlnlkw.supabase.co";
 
+
 const SUPABASE_KEY =
   "sb_publishable_FqVACHntdH1Nu1RzfpytYw_Vayf41mv";
+
 
 const supabase =
   window.supabase.createClient(
@@ -504,267 +703,554 @@ const supabase =
     SUPABASE_KEY
   );
 
-const figures=[
-
-{
-name:"サンプルフィギュア A",
-maker:"メーカー名",
-series:"作品名",
-character:"キャラクター名",
-scale:"1/7",
-image:null,
-
-memories:[
-
-{
-text:"旅行に連れていった。",
-date:"2026.09"
-},
-
-{
-text:"初めて買ったフィギュア。",
-date:"2026.08"
-},
-
-{
-text:"ずっと部屋に飾っている。",
-date:"2026.07"
-}
-
-]
-
-},
-
-
-{
-name:"サンプルフィギュア B",
-maker:"メーカー名",
-series:"作品名",
-character:"キャラクター名",
-scale:"1/6",
-image:null,
-
-memories:[
-
-{
-text:"この場所で撮影した。",
-date:"2026.09"
-},
-
-{
-text:"届いた日の写真。",
-date:"2026.06"
-}
-
-]
-
-},
-
-
-{
-name:"サンプルフィギュア C",
-maker:"メーカー名",
-series:"作品名",
-character:"キャラクター名",
-scale:"1/4",
-image:null,
-
-memories:[
-
-{
-text:"お気に入りの一体。",
-date:"2026.05"
-}
-
-]
-
-}
-
-];
-
 
 /* =========================
-   一覧表示
+   画面
 ========================= */
 
-const grid=document.getElementById("grid");
+const grid =
+  document.getElementById("grid");
+
+const modal =
+  document.getElementById("modal");
+
+const photoGrid =
+  document.getElementById("photo-grid");
 
 
-figures.forEach((f,i)=>{
-
-const card=document.createElement("div");
-
-card.className="card";
-
-
-const imageHTML=f.image
-? `<img src="${f.image}" style="width:100%;height:100%;object-fit:cover;">`
-: `NO IMAGE`;
-
-
-card.innerHTML=`
-
-<div class="image">
-${imageHTML}
-</div>
-
-<div class="info">
-
-<div class="maker">
-${f.maker}
-</div>
-
-<div class="name">
-${f.name}
-</div>
-
-<div class="meta">
-${f.series}
-</div>
-
-</div>
-
-`;
-
-
-card.onclick=()=>openModal(i);
-
-grid.appendChild(card);
-
-});
+let figures = [];
 
 
 /* =========================
-   詳細表示
+   フィギュア一覧を取得
 ========================= */
 
-function openModal(i){
+async function loadFigures(){
 
-const f=figures[i];
-
-
-document.getElementById("d-name")
-.textContent=f.name;
-
-document.getElementById("d-maker")
-.textContent=f.maker;
-
-document.getElementById("d-series")
-.textContent=f.series;
-
-document.getElementById("d-character")
-.textContent=f.character;
-
-document.getElementById("d-scale")
-.textContent=f.scale;
+  grid.innerHTML = `
+    <div class="message">
+      FIGURES LOADING...
+    </div>
+  `;
 
 
-/* フィギュア画像 */
+  const result =
+    await supabase
 
-const detailImage=
-document.getElementById("detail-image");
+      .from("figures")
 
-
-if(f.image){
-
-detailImage.innerHTML=
-`<img
-src="${f.image}"
-style="width:100%;height:100%;object-fit:contain;"
->`;
-
-}else{
-
-detailImage.textContent="NO IMAGE";
-
-}
+      .select("*");
 
 
-/* 記憶 */
+  const data =
+    result.data;
 
-const memoryGrid=
-document.getElementById("memory-grid");
-
-
-memoryGrid.innerHTML="";
+  const error =
+    result.error;
 
 
-f.memories.forEach(memory=>{
+  if(error){
 
-const item=
-document.createElement("div");
-
-item.className="memory";
-
-
-item.innerHTML=`
-
-<div class="memory-photo">
-MEMORY PHOTO
-</div>
-
-<div class="memory-text">
-
-${memory.text}
-
-<div class="memory-date">
-${memory.date}
-</div>
-
-</div>
-
-`;
+    console.error(
+      "FIGURES ERROR:",
+      error
+    );
 
 
-memoryGrid.appendChild(item);
+    grid.innerHTML = `
+      <div class="message">
+        フィギュアを読み込めませんでした。
+      </div>
+    `;
 
-});
-
-
-/* 投稿準備中を閉じる */
-
-document
-.getElementById("coming")
-.classList.remove("show");
+    return;
+  }
 
 
-/* モーダル表示 */
+  figures =
+    data || [];
 
-document
-.getElementById("modal")
-.classList.add("show");
+
+  if(figures.length === 0){
+
+    grid.innerHTML = `
+      <div class="message">
+        フィギュアがまだ登録されていません。
+      </div>
+    `;
+
+    return;
+  }
+
+
+  renderFigures();
 
 }
 
 
 /* =========================
-   モーダルを閉じる
+   フィギュア表示
+========================= */
+
+function renderFigures(){
+
+  grid.innerHTML = "";
+
+
+  figures.forEach(
+    (figure, index) => {
+
+      const card =
+        document.createElement("div");
+
+
+      card.className =
+        "card";
+
+
+      const image =
+        figure.image_url
+        ? `
+          <img
+            src="${escapeHTML(
+              figure.image_url
+            )}"
+            alt=""
+          >
+        `
+        : "NO IMAGE";
+
+
+      card.innerHTML = `
+
+        <div class="image">
+          ${image}
+        </div>
+
+
+        <div class="info">
+
+          <div class="maker">
+            ${escapeHTML(
+              figure.maker || ""
+            )}
+          </div>
+
+
+          <div class="name">
+            ${escapeHTML(
+              figure.name || "名称未設定"
+            )}
+          </div>
+
+
+          <div class="meta">
+            ${escapeHTML(
+              figure.series || ""
+            )}
+          </div>
+
+        </div>
+
+      `;
+
+
+      card.onclick =
+        () => openFigure(index);
+
+
+      grid.appendChild(card);
+
+    }
+  );
+
+}
+
+
+/* =========================
+   フィギュア詳細
+========================= */
+
+async function openFigure(index){
+
+  const figure =
+    figures[index];
+
+
+  document.getElementById(
+    "d-name"
+  ).textContent =
+    figure.name || "";
+
+
+  document.getElementById(
+    "d-maker"
+  ).textContent =
+    figure.maker || "";
+
+
+  document.getElementById(
+    "d-series"
+  ).textContent =
+    figure.series || "";
+
+
+  document.getElementById(
+    "d-character"
+  ).textContent =
+    figure.character || "";
+
+
+  document.getElementById(
+    "d-scale"
+  ).textContent =
+    figure.scale || "";
+
+
+  const detailImage =
+    document.getElementById(
+      "detail-image"
+    );
+
+
+  if(figure.image_url){
+
+    detailImage.innerHTML = `
+
+      <img
+        src="${escapeHTML(
+          figure.image_url
+        )}"
+        alt=""
+      >
+
+    `;
+
+  }else{
+
+    detailImage.textContent =
+      "NO IMAGE";
+
+  }
+
+
+  modal.classList.add("show");
+
+
+  document.body.style.overflow =
+    "hidden";
+
+
+  await loadPhotos(
+    figure.id
+  );
+
+}
+
+
+/* =========================
+   写真一覧を取得
+========================= */
+
+async function loadPhotos(
+  figureId
+){
+
+  photoGrid.innerHTML = `
+    <div class="message">
+      PHOTO LOADING...
+    </div>
+  `;
+
+
+  const result =
+    await supabase
+
+      .from("figure_photos")
+
+      .select(
+        "created_at,figure_id,user_id,image_url,caption"
+      )
+
+      .eq(
+        "figure_id",
+        figureId
+      )
+
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      );
+
+
+  const data =
+    result.data;
+
+  const error =
+    result.error;
+
+
+  if(error){
+
+    console.error(
+      "PHOTO ERROR:",
+      error
+    );
+
+
+    photoGrid.innerHTML = `
+      <div class="message">
+        写真を読み込めませんでした。
+      </div>
+    `;
+
+    return;
+  }
+
+
+  if(!data || data.length === 0){
+
+    photoGrid.innerHTML = `
+      <div class="message">
+        このフィギュアの写真はまだありません。
+      </div>
+    `;
+
+    return;
+  }
+
+
+  photoGrid.innerHTML = "";
+
+
+  data.forEach(
+    photo => {
+
+      const card =
+        document.createElement("div");
+
+
+      card.className =
+        "photo-card";
+
+
+      card.innerHTML = `
+
+        <div class="photo-image">
+
+          <img
+            src="${escapeHTML(
+              photo.image_url
+            )}"
+            alt=""
+          >
+
+        </div>
+
+
+        ${
+          photo.caption
+          ?
+          `
+            <div class="photo-caption">
+              ${escapeHTML(
+                photo.caption
+              )}
+            </div>
+          `
+          :
+          ""
+        }
+
+      `;
+
+
+      card.onclick =
+        () => openPhoto(
+          photo.image_url
+        );
+
+
+      photoGrid.appendChild(
+        card
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================
+   詳細を閉じる
 ========================= */
 
 function closeModal(){
 
-document
-.getElementById("modal")
-.classList.remove("show");
+  modal.classList.remove(
+    "show"
+  );
+
+  document.body.style.overflow =
+    "";
 
 }
 
 
 /* =========================
-   投稿ボタン
+   写真を見る
 ========================= */
 
-function showComingSoon(){
+function openPhoto(
+  imageUrl
+){
 
-document
-.getElementById("coming")
-.classList.add("show");
+  document.getElementById(
+    "viewer-image"
+  ).src =
+    imageUrl;
+
+
+  document.getElementById(
+    "photo-viewer"
+  ).classList.add(
+    "show"
+  );
 
 }
 
 
+/* =========================
+   写真を閉じる
+========================= */
+
+function closePhoto(){
+
+  document.getElementById(
+    "photo-viewer"
+  ).classList.remove(
+    "show"
+  );
+
+
+  document.getElementById(
+    "viewer-image"
+  ).src =
+    "";
+
+}
+
+
+/* =========================
+   モーダル外クリック
+========================= */
+
+modal.addEventListener(
+  "click",
+  event => {
+
+    if(
+      event.target === modal
+    ){
+
+      closeModal();
+
+    }
+
+  }
+);
+
+
+document
+  .getElementById(
+    "photo-viewer"
+  )
+  .addEventListener(
+    "click",
+    event => {
+
+      if(
+        event.target.id ===
+        "photo-viewer"
+      ){
+
+        closePhoto();
+
+      }
+
+    }
+  );
+
+
+/* =========================
+   ESCキー
+========================= */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(
+      event.key === "Escape"
+    ){
+
+      closePhoto();
+      closeModal();
+
+    }
+
+  }
+);
+
+
+/* =========================
+   HTMLエスケープ
+========================= */
+
+function escapeHTML(
+  value
+){
+
+  return String(value)
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+/* =========================
+   開始
+========================= */
+
+loadFigures();
+
+
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
 </body>
