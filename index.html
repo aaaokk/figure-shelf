@@ -5,13 +5,9 @@
 
 <meta charset="UTF-8">
 
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1"
->
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>HENTAI FIGURE SHELF</title>
-
 
 <style>
 
@@ -23,30 +19,21 @@ body{
   margin:0;
   background:#111;
   color:#eee;
-  font-family:
-    Arial,
-    "Noto Sans JP",
-    sans-serif;
+  font-family:Arial,"Noto Sans JP",sans-serif;
 }
 
 header{
   position:sticky;
   top:0;
   z-index:10;
-
   background:#090909;
   border-bottom:1px solid #333;
-
   padding:18px 24px;
 }
 
 .header{
   max-width:1200px;
   margin:auto;
-
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
 }
 
 .logo{
@@ -96,13 +83,7 @@ main{
 
 .grid{
   display:grid;
-
-  grid-template-columns:
-    repeat(
-      auto-fill,
-      minmax(220px,1fr)
-    );
-
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
   gap:18px;
 }
 
@@ -120,15 +101,11 @@ main{
 
 .image{
   aspect-ratio:1;
-
   background:#292929;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   color:#777;
-
   overflow:hidden;
 }
 
@@ -162,30 +139,26 @@ main{
 .notice{
   margin-top:60px;
   padding:18px;
-
   border:1px solid #444;
-
   color:#999;
   font-size:12px;
   line-height:1.7;
 }
 
-
-/* =========================
-   詳細モーダル
-========================= */
+.message{
+  padding:30px;
+  border:1px solid #333;
+  color:#aaa;
+  line-height:1.7;
+}
 
 .modal{
   display:none;
-
   position:fixed;
   inset:0;
   z-index:100;
-
   background:#000c;
-
   padding:20px;
-
   overflow:auto;
 }
 
@@ -195,33 +168,23 @@ main{
 
 .modal-box{
   max-width:1000px;
-
   margin:30px auto;
-
   background:#181818;
-
   border:1px solid #444;
 }
 
 .modal-head{
   display:flex;
-
   justify-content:space-between;
-  align-items:center;
-
   padding:15px 20px;
-
   border-bottom:1px solid #333;
 }
 
 .close{
   border:0;
   background:none;
-
   color:white;
-
   font-size:28px;
-
   cursor:pointer;
 }
 
@@ -232,25 +195,18 @@ main{
 
 .detail-image{
   min-height:450px;
-
   background:#292929;
-
   display:flex;
-
   align-items:center;
   justify-content:center;
-
   color:#777;
-
   overflow:hidden;
 }
 
 .detail-image img{
   width:100%;
   height:100%;
-
   max-height:600px;
-
   object-fit:contain;
 }
 
@@ -270,16 +226,9 @@ main{
 
 .row b{
   display:inline-block;
-
-  width:110px;
-
+  width:120px;
   color:#999;
 }
-
-
-/* =========================
-   写真一覧
-========================= */
 
 .photos{
   border-top:1px solid #333;
@@ -288,146 +237,83 @@ main{
 
 .photos-title{
   color:#e43b70;
-
   font-size:12px;
   font-weight:bold;
-
   letter-spacing:.15em;
-
   margin-bottom:8px;
 }
 
 .photos-heading{
   font-size:28px;
   font-weight:bold;
-
   margin-bottom:25px;
 }
 
 .photo-grid{
   display:grid;
-
-  grid-template-columns:
-    repeat(
-      auto-fill,
-      minmax(180px,1fr)
-    );
-
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
   gap:15px;
 }
 
 .photo-card{
   background:#222;
   border:1px solid #333;
-
   cursor:pointer;
-
-  transition:.2s;
-}
-
-.photo-card:hover{
-  border-color:#e43b70;
-  transform:translateY(-3px);
 }
 
 .photo-image{
   aspect-ratio:1;
-
   background:#2b2b2b;
-
   display:flex;
-
   align-items:center;
   justify-content:center;
-
   overflow:hidden;
-
-  color:#666;
 }
 
 .photo-image img{
   width:100%;
   height:100%;
-
   object-fit:cover;
 }
 
 .photo-caption{
   padding:12px;
-
   color:#ccc;
-
   font-size:13px;
   line-height:1.5;
 }
 
-
-/* =========================
-   写真拡大
-========================= */
-
-.photo-viewer{
+.viewer{
   display:none;
-
   position:fixed;
   inset:0;
-
   z-index:200;
-
   background:#000e;
-
-  padding:30px;
-
   align-items:center;
   justify-content:center;
+  padding:30px;
 }
 
-.photo-viewer.show{
+.viewer.show{
   display:flex;
 }
 
-.photo-viewer img{
+.viewer img{
   max-width:95vw;
   max-height:90vh;
-
   object-fit:contain;
 }
 
-.photo-close{
+.viewer-close{
   position:fixed;
-
   top:15px;
   right:25px;
-
   border:0;
   background:none;
-
   color:white;
-
   font-size:38px;
-
   cursor:pointer;
 }
-
-
-/* =========================
-   ローディング・エラー
-========================= */
-
-.message{
-  padding:40px 20px;
-
-  text-align:center;
-
-  color:#777;
-
-  border:1px solid #333;
-}
-
-
-/* =========================
-   スマホ
-========================= */
 
 @media(max-width:700px){
 
@@ -447,255 +333,203 @@ main{
     padding:25px;
   }
 
-  .photo-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
 }
 
 </style>
 
 </head>
 
-
 <body>
-
 
 <header>
 
-  <div class="header">
+<div class="header">
 
-    <div class="logo">
-      HENTAI
-      <span>FIGURE SHELF</span>
-    </div>
+<div class="logo">
+HENTAI <span>FIGURE SHELF</span>
+</div>
 
-  </div>
+</div>
 
 </header>
 
 
 <main>
 
-
 <section class="hero">
 
-  <small>
-    ADULT FIGURE DATABASE
-  </small>
+<small>ADULT FIGURE DATABASE</small>
 
-  <h1>
-    HENTAI<br>
-    FIGURE SHELF
-  </h1>
+<h1>
+HENTAI<br>
+FIGURE SHELF
+</h1>
 
-  <p>
-    成人向けフィギュアを中心に、
-    フィギュアそのものを主役として
-    記録・共有するデータベース。
-  </p>
+<p>
+成人向けフィギュアを中心に、
+フィギュアそのものを主役として
+記録・共有するデータベース。
+</p>
 
 </section>
 
 
 <section>
 
-  <div class="section-title">
-    FIGURES
-  </div>
+<div class="section-title">
+FIGURES
+</div>
 
-  <div
-    id="grid"
-    class="grid"
-  >
+<div
+  id="grid"
+  class="grid"
+>
 
-    <div class="message">
-      FIGURES LOADING...
-    </div>
+<div class="message">
+読み込み中...
+</div>
 
-  </div>
+</div>
 
 </section>
 
 
 <div class="notice">
 
-  このサイトでは成人向けフィギュアを扱います。<br>
-
-  閲覧・利用にあたっては、
-  利用者の居住地域および
-  各サービスの利用規約に従ってください。
+このサイトでは成人向けフィギュアを扱います。<br>
+閲覧・利用にあたっては、
+利用者の居住地域および各サービスの利用規約に従ってください。
 
 </div>
-
 
 </main>
 
 
-
-<!-- =========================
-     フィギュア詳細
-========================= -->
+<!-- フィギュア詳細 -->
 
 <div
   id="modal"
   class="modal"
 >
 
-  <div class="modal-box">
+<div class="modal-box">
 
+<div class="modal-head">
 
-    <div class="modal-head">
+<b>FIGURE</b>
 
-      <b>FIGURE</b>
-
-      <button
-        class="close"
-        onclick="closeModal()"
-      >
-        ×
-      </button>
-
-    </div>
-
-
-    <div class="detail">
-
-
-      <div
-        class="detail-image"
-        id="detail-image"
-      >
-        NO IMAGE
-      </div>
-
-
-      <div class="detail-info">
-
-        <h2 id="d-name"></h2>
-
-
-        <div class="row">
-
-          <b>メーカー</b>
-
-          <span id="d-maker"></span>
-
-        </div>
-
-
-        <div class="row">
-
-          <b>作品</b>
-
-          <span id="d-series"></span>
-
-        </div>
-
-
-        <div class="row">
-
-          <b>キャラクター</b>
-
-          <span id="d-character"></span>
-
-        </div>
-
-
-        <div class="row">
-
-          <b>スケール</b>
-
-          <span id="d-scale"></span>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- 写真一覧 -->
-
-    <div class="photos">
-
-      <div class="photos-title">
-        PHOTOS
-      </div>
-
-      <div class="photos-heading">
-        このフィギュアの写真
-      </div>
-
-
-      <div
-        id="photo-grid"
-        class="photo-grid"
-      >
-
-        <div class="message">
-          PHOTO LOADING...
-        </div>
-
-      </div>
-
-    </div>
-
-
-  </div>
+<button
+  class="close"
+  onclick="closeModal()"
+>
+×
+</button>
 
 </div>
 
 
-
-<!-- =========================
-     写真拡大
-========================= -->
+<div class="detail">
 
 <div
-  id="photo-viewer"
-  class="photo-viewer"
+  class="detail-image"
+  id="detail-image"
 >
-
-  <button
-    class="photo-close"
-    onclick="closePhoto()"
-  >
-    ×
-  </button>
+NO IMAGE
+</div>
 
 
-  <img
-    id="viewer-image"
-    src=""
-    alt=""
-  >
+<div class="detail-info">
+
+<h2 id="d-name"></h2>
+
+<div class="row">
+<b>メーカー</b>
+<span id="d-maker"></span>
+</div>
+
+<div class="row">
+<b>作品</b>
+<span id="d-series"></span>
+</div>
+
+<div class="row">
+<b>キャラクター</b>
+<span id="d-character"></span>
+</div>
+
+<div class="row">
+<b>スケール</b>
+<span id="d-scale"></span>
+</div>
+
+</div>
 
 </div>
 
 
+<!-- 写真 -->
 
-<!-- =========================
-     Supabase
-========================= -->
+<div class="photos">
+
+<div class="photos-title">
+PHOTOS
+</div>
+
+<div class="photos-heading">
+このフィギュアの写真
+</div>
+
+<div
+  id="photo-grid"
+  class="photo-grid"
+>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 写真拡大 -->
+
+<div
+  id="viewer"
+  class="viewer"
+  onclick="closeViewer()"
+>
+
+<button
+  class="viewer-close"
+  onclick="closeViewer()"
+>
+×
+</button>
+
+<img
+  id="viewer-image"
+  src=""
+  alt=""
+>
+
+</div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
 <script>
 
-
 /* =========================
-   Supabase設定
+   Supabase
 ========================= */
 
 const SUPABASE_URL =
   "https://voftbkqqkiwybnjlnlkw.supabase.co";
 
-
 const SUPABASE_KEY =
   "sb_publishable_FqVACHntdH1Nu1RzfpytYw_Vayf41mv";
-
 
 const supabase =
   window.supabase.createClient(
@@ -717,12 +551,11 @@ const modal =
 const photoGrid =
   document.getElementById("photo-grid");
 
-
 let figures = [];
 
 
 /* =========================
-   フィギュア一覧を取得
+   フィギュア取得
 ========================= */
 
 async function loadFigures(){
@@ -736,30 +569,23 @@ async function loadFigures(){
 
   const result =
     await supabase
-
       .from("figures")
-
-      .select("*");
-
-
-  const data =
-    result.data;
-
-  const error =
-    result.error;
+      .select(
+        "id,name,series,manufaster,sharactername,scale"
+      );
 
 
-  if(error){
+  if(result.error){
 
     console.error(
-      "FIGURES ERROR:",
-      error
+      "FIGURES ERROR",
+      result.error
     );
-
 
     grid.innerHTML = `
       <div class="message">
-        フィギュアを読み込めませんでした。
+        <strong>読み込みエラー</strong><br><br>
+        ${result.error.message}
       </div>
     `;
 
@@ -768,14 +594,14 @@ async function loadFigures(){
 
 
   figures =
-    data || [];
+    result.data || [];
 
 
   if(figures.length === 0){
 
     grid.innerHTML = `
       <div class="message">
-        フィギュアがまだ登録されていません。
+        フィギュアがありません。
       </div>
     `;
 
@@ -783,66 +609,37 @@ async function loadFigures(){
   }
 
 
-  renderFigures();
-
-}
-
-
-/* =========================
-   フィギュア表示
-========================= */
-
-function renderFigures(){
-
   grid.innerHTML = "";
 
 
   figures.forEach(
-    (figure, index) => {
+    (figure,index) => {
 
       const card =
         document.createElement("div");
 
-
-      card.className =
-        "card";
-
-
-      const image =
-        figure.image_url
-        ? `
-          <img
-            src="${escapeHTML(
-              figure.image_url
-            )}"
-            alt=""
-          >
-        `
-        : "NO IMAGE";
+      card.className = "card";
 
 
       card.innerHTML = `
 
         <div class="image">
-          ${image}
+          NO IMAGE
         </div>
-
 
         <div class="info">
 
           <div class="maker">
             ${escapeHTML(
-              figure.maker || ""
+              figure.manufaster || ""
             )}
           </div>
-
 
           <div class="name">
             ${escapeHTML(
-              figure.name || "名称未設定"
+              figure.name || ""
             )}
           </div>
-
 
           <div class="meta">
             ${escapeHTML(
@@ -868,7 +665,7 @@ function renderFigures(){
 
 
 /* =========================
-   フィギュア詳細
+   詳細
 ========================= */
 
 async function openFigure(index){
@@ -886,7 +683,7 @@ async function openFigure(index){
   document.getElementById(
     "d-maker"
   ).textContent =
-    figure.maker || "";
+    figure.manufaster || "";
 
 
   document.getElementById(
@@ -898,7 +695,7 @@ async function openFigure(index){
   document.getElementById(
     "d-character"
   ).textContent =
-    figure.character || "";
+    figure.sharactername || "";
 
 
   document.getElementById(
@@ -907,38 +704,7 @@ async function openFigure(index){
     figure.scale || "";
 
 
-  const detailImage =
-    document.getElementById(
-      "detail-image"
-    );
-
-
-  if(figure.image_url){
-
-    detailImage.innerHTML = `
-
-      <img
-        src="${escapeHTML(
-          figure.image_url
-        )}"
-        alt=""
-      >
-
-    `;
-
-  }else{
-
-    detailImage.textContent =
-      "NO IMAGE";
-
-  }
-
-
   modal.classList.add("show");
-
-
-  document.body.style.overflow =
-    "hidden";
 
 
   await loadPhotos(
@@ -949,7 +715,7 @@ async function openFigure(index){
 
 
 /* =========================
-   写真一覧を取得
+   写真取得
 ========================= */
 
 async function loadPhotos(
@@ -958,25 +724,21 @@ async function loadPhotos(
 
   photoGrid.innerHTML = `
     <div class="message">
-      PHOTO LOADING...
+      写真を読み込み中...
     </div>
   `;
 
 
   const result =
     await supabase
-
-      .from("figure_photos")
-
+      .from("figure-photos")
       .select(
         "created_at,figure_id,user_id,image_url,caption"
       )
-
       .eq(
         "figure_id",
         figureId
       )
-
       .order(
         "created_at",
         {
@@ -985,24 +747,17 @@ async function loadPhotos(
       );
 
 
-  const data =
-    result.data;
-
-  const error =
-    result.error;
-
-
-  if(error){
+  if(result.error){
 
     console.error(
-      "PHOTO ERROR:",
-      error
+      "PHOTO ERROR",
+      result.error
     );
-
 
     photoGrid.innerHTML = `
       <div class="message">
-        写真を読み込めませんでした。
+        <strong>写真の読み込みエラー</strong><br><br>
+        ${result.error.message}
       </div>
     `;
 
@@ -1010,7 +765,11 @@ async function loadPhotos(
   }
 
 
-  if(!data || data.length === 0){
+  const photos =
+    result.data || [];
+
+
+  if(photos.length === 0){
 
     photoGrid.innerHTML = `
       <div class="message">
@@ -1025,12 +784,11 @@ async function loadPhotos(
   photoGrid.innerHTML = "";
 
 
-  data.forEach(
+  photos.forEach(
     photo => {
 
       const card =
         document.createElement("div");
-
 
       card.className =
         "photo-card";
@@ -1049,16 +807,15 @@ async function loadPhotos(
 
         </div>
 
-
         ${
           photo.caption
           ?
           `
-            <div class="photo-caption">
-              ${escapeHTML(
-                photo.caption
-              )}
-            </div>
+          <div class="photo-caption">
+            ${escapeHTML(
+              photo.caption
+            )}
+          </div>
           `
           :
           ""
@@ -1068,7 +825,7 @@ async function loadPhotos(
 
 
       card.onclick =
-        () => openPhoto(
+        () => openViewer(
           photo.image_url
         );
 
@@ -1084,7 +841,7 @@ async function loadPhotos(
 
 
 /* =========================
-   詳細を閉じる
+   閉じる
 ========================= */
 
 function closeModal(){
@@ -1093,17 +850,10 @@ function closeModal(){
     "show"
   );
 
-  document.body.style.overflow =
-    "";
-
 }
 
 
-/* =========================
-   写真を見る
-========================= */
-
-function openPhoto(
+function openViewer(
   imageUrl
 ){
 
@@ -1112,9 +862,8 @@ function openPhoto(
   ).src =
     imageUrl;
 
-
   document.getElementById(
-    "photo-viewer"
+    "viewer"
   ).classList.add(
     "show"
   );
@@ -1122,96 +871,22 @@ function openPhoto(
 }
 
 
-/* =========================
-   写真を閉じる
-========================= */
-
-function closePhoto(){
+function closeViewer(){
 
   document.getElementById(
-    "photo-viewer"
+    "viewer"
   ).classList.remove(
     "show"
   );
 
-
-  document.getElementById(
-    "viewer-image"
-  ).src =
-    "";
-
 }
-
-
-/* =========================
-   モーダル外クリック
-========================= */
-
-modal.addEventListener(
-  "click",
-  event => {
-
-    if(
-      event.target === modal
-    ){
-
-      closeModal();
-
-    }
-
-  }
-);
-
-
-document
-  .getElementById(
-    "photo-viewer"
-  )
-  .addEventListener(
-    "click",
-    event => {
-
-      if(
-        event.target.id ===
-        "photo-viewer"
-      ){
-
-        closePhoto();
-
-      }
-
-    }
-  );
-
-
-/* =========================
-   ESCキー
-========================= */
-
-document.addEventListener(
-  "keydown",
-  event => {
-
-    if(
-      event.key === "Escape"
-    ){
-
-      closePhoto();
-      closeModal();
-
-    }
-
-  }
-);
 
 
 /* =========================
    HTMLエスケープ
 ========================= */
 
-function escapeHTML(
-  value
-){
+function escapeHTML(value){
 
   return String(value)
 
@@ -1249,9 +924,7 @@ function escapeHTML(
 
 loadFigures();
 
-
 </script>
-
 
 </body>
 
