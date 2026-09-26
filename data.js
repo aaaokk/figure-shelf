@@ -1,5 +1,4 @@
 const figures = [
-
   {
     id: "figure-a",
     name: "FIGURE A",
@@ -7,7 +6,7 @@ const figures = [
     series: "作品名",
     character: "キャラクター名",
     scale: "1/7",
-    image: "images/figure-a.jpg",
+    image: "images/figure-a.jpg.jpeg",
     description: "このフィギュアについての説明です。"
   },
 
@@ -21,12 +20,10 @@ const figures = [
     image: "",
     description: "このフィギュアについての説明です。"
   }
-
 ];
 
 
 const posts = [
-
   {
     id: "post-001",
     figureId: "figure-a",
@@ -48,5 +45,5 @@ const posts = [
     note: "旅行先に持っていきました。",
     comment: ""
   }
-
 ];
+
