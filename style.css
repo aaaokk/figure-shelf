@@ -246,7 +246,14 @@ a {
   transform: scale(1.025);
 }
 
+
+/* =========================
+   NO IMAGE
+   画像がないときだけ表示
+========================= */
+
 .no-image-text {
+  display: none;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -255,6 +262,15 @@ a {
   letter-spacing: 0.18em;
   color: #888;
 }
+
+.no-image .no-image-text {
+  display: block;
+}
+
+
+/* =========================
+   FIGURE INFO
+========================= */
 
 .figure-info {
   padding: 24px;
@@ -742,3 +758,4 @@ a {
     grid-template-columns: 1fr;
   }
 }
+
