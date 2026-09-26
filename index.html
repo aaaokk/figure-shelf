@@ -60,11 +60,7 @@
 </footer>
 
 
-<!--
-  data.js?v=2
-  とすることで、古いdata.jsがブラウザに残るのを防ぎます。
--->
-<script src="data.js?v=2"></script>
+<script src="data.js?v=3"></script>
 
 
 <script>
@@ -154,12 +150,12 @@ function showHome() {
                   onerror="showImageError(this)"
                 >
               `
-              : ""
+              : `
+                <span class="no-image-text">
+                  NO IMAGE
+                </span>
+              `
           }
-
-          <span class="no-image-text">
-            NO IMAGE
-          </span>
 
         </div>
 
@@ -301,12 +297,12 @@ function showFigure(figureId) {
                   onerror="showImageError(this)"
                 >
               `
-              : ""
+              : `
+                <span class="no-image-text">
+                  NO IMAGE
+                </span>
+              `
           }
-
-          <span class="no-image-text">
-            NO IMAGE
-          </span>
 
         </div>
 
@@ -430,12 +426,12 @@ function showFigure(figureId) {
                   onerror="showImageError(this)"
                 >
               `
-              : ""
+              : `
+                <span class="no-image-text">
+                  NO IMAGE
+                </span>
+              `
           }
-
-          <span class="no-image-text">
-            NO IMAGE
-          </span>
 
         </div>
 
@@ -743,7 +739,21 @@ function showImageError(image) {
 
   image.style.display = "none";
 
-  image.parentElement.classList.add("no-image");
+  const parent = image.parentElement;
+
+  parent.classList.add("no-image");
+
+  if (!parent.querySelector(".no-image-text")) {
+
+    const message = document.createElement("span");
+
+    message.className = "no-image-text";
+
+    message.textContent = "NO IMAGE";
+
+    parent.appendChild(message);
+
+  }
 
 }
 
