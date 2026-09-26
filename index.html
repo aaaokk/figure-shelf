@@ -1,933 +1,763 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
+  <meta charset="UTF-8">
 
-<meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-<meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HENTAI FIGURE SHELF</title>
 
-<title>HENTAI FIGURE SHELF</title>
+  <meta
+    name="description"
+    content="フィギュアそのものを主役として記録・共有する個人データベース。"
+  >
 
-<style>
-
-*{
-  box-sizing:border-box;
-}
-
-body{
-  margin:0;
-  background:#111;
-  color:#eee;
-  font-family:Arial,"Noto Sans JP",sans-serif;
-}
-
-header{
-  position:sticky;
-  top:0;
-  z-index:10;
-  background:#090909;
-  border-bottom:1px solid #333;
-  padding:18px 24px;
-}
-
-.header{
-  max-width:1200px;
-  margin:auto;
-}
-
-.logo{
-  font-size:22px;
-  font-weight:900;
-  letter-spacing:.08em;
-}
-
-.logo span{
-  color:#e43b70;
-}
-
-main{
-  max-width:1200px;
-  margin:auto;
-  padding:55px 24px 100px;
-}
-
-.hero{
-  margin-bottom:60px;
-}
-
-.hero small{
-  color:#e43b70;
-  font-weight:bold;
-  letter-spacing:.15em;
-}
-
-.hero h1{
-  font-size:clamp(42px,8vw,90px);
-  line-height:.9;
-  margin:15px 0;
-}
-
-.hero p{
-  color:#aaa;
-  line-height:1.8;
-  max-width:650px;
-}
-
-.section-title{
-  border-top:2px solid #eee;
-  padding-top:14px;
-  margin-bottom:25px;
-  font-weight:bold;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-  gap:18px;
-}
-
-.card{
-  background:#1b1b1b;
-  border:1px solid #333;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.card:hover{
-  transform:translateY(-4px);
-  border-color:#e43b70;
-}
-
-.image{
-  aspect-ratio:1;
-  background:#292929;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#777;
-  overflow:hidden;
-}
-
-.image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.info{
-  padding:17px;
-}
-
-.maker{
-  color:#999;
-  font-size:11px;
-  margin-bottom:7px;
-}
-
-.name{
-  font-size:18px;
-  font-weight:bold;
-}
-
-.meta{
-  margin-top:12px;
-  color:#999;
-  font-size:12px;
-}
-
-.notice{
-  margin-top:60px;
-  padding:18px;
-  border:1px solid #444;
-  color:#999;
-  font-size:12px;
-  line-height:1.7;
-}
-
-.message{
-  padding:30px;
-  border:1px solid #333;
-  color:#aaa;
-  line-height:1.7;
-}
-
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:100;
-  background:#000c;
-  padding:20px;
-  overflow:auto;
-}
-
-.modal.show{
-  display:block;
-}
-
-.modal-box{
-  max-width:1000px;
-  margin:30px auto;
-  background:#181818;
-  border:1px solid #444;
-}
-
-.modal-head{
-  display:flex;
-  justify-content:space-between;
-  padding:15px 20px;
-  border-bottom:1px solid #333;
-}
-
-.close{
-  border:0;
-  background:none;
-  color:white;
-  font-size:28px;
-  cursor:pointer;
-}
-
-.detail{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-}
-
-.detail-image{
-  min-height:450px;
-  background:#292929;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#777;
-  overflow:hidden;
-}
-
-.detail-image img{
-  width:100%;
-  height:100%;
-  max-height:600px;
-  object-fit:contain;
-}
-
-.detail-info{
-  padding:35px;
-}
-
-.detail-info h2{
-  font-size:34px;
-  margin-top:0;
-}
-
-.row{
-  padding:14px 0;
-  border-bottom:1px solid #333;
-}
-
-.row b{
-  display:inline-block;
-  width:120px;
-  color:#999;
-}
-
-.photos{
-  border-top:1px solid #333;
-  padding:30px;
-}
-
-.photos-title{
-  color:#e43b70;
-  font-size:12px;
-  font-weight:bold;
-  letter-spacing:.15em;
-  margin-bottom:8px;
-}
-
-.photos-heading{
-  font-size:28px;
-  font-weight:bold;
-  margin-bottom:25px;
-}
-
-.photo-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-  gap:15px;
-}
-
-.photo-card{
-  background:#222;
-  border:1px solid #333;
-  cursor:pointer;
-}
-
-.photo-image{
-  aspect-ratio:1;
-  background:#2b2b2b;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-}
-
-.photo-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.photo-caption{
-  padding:12px;
-  color:#ccc;
-  font-size:13px;
-  line-height:1.5;
-}
-
-.viewer{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:200;
-  background:#000e;
-  align-items:center;
-  justify-content:center;
-  padding:30px;
-}
-
-.viewer.show{
-  display:flex;
-}
-
-.viewer img{
-  max-width:95vw;
-  max-height:90vh;
-  object-fit:contain;
-}
-
-.viewer-close{
-  position:fixed;
-  top:15px;
-  right:25px;
-  border:0;
-  background:none;
-  color:white;
-  font-size:38px;
-  cursor:pointer;
-}
-
-@media(max-width:700px){
-
-  .detail{
-    grid-template-columns:1fr;
-  }
-
-  .detail-image{
-    min-height:300px;
-  }
-
-  .detail-info{
-    padding:25px;
-  }
-
-  .photos{
-    padding:25px;
-  }
-
-}
-
-</style>
-
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
+  <!-- =========================
+       HEADER
+  ========================== -->
 
-<div class="header">
+  <header class="site-header">
 
-<div class="logo">
-HENTAI <span>FIGURE SHELF</span>
-</div>
+    <div class="header-inner">
 
-</div>
+      <a href="#" class="logo" onclick="showHome(); return false;">
+        <span>HENTAI</span>
+        <strong>FIGURE SHELF</strong>
+      </a>
 
-</header>
+      <button
+        class="about-button"
+        onclick="showAbout()"
+      >
+        ABOUT
+      </button>
 
-
-<main>
-
-<section class="hero">
-
-<small>ADULT FIGURE DATABASE</small>
-
-<h1>
-HENTAI<br>
-FIGURE SHELF
-</h1>
-
-<p>
-成人向けフィギュアを中心に、
-フィギュアそのものを主役として
-記録・共有するデータベース。
-</p>
-
-</section>
-
-
-<section>
-
-<div class="section-title">
-FIGURES
-</div>
-
-<div
-  id="grid"
-  class="grid"
->
-
-<div class="message">
-読み込み中...
-</div>
-
-</div>
-
-</section>
-
-
-<div class="notice">
-
-このサイトでは成人向けフィギュアを扱います。<br>
-閲覧・利用にあたっては、
-利用者の居住地域および各サービスの利用規約に従ってください。
-
-</div>
-
-</main>
-
-
-<!-- フィギュア詳細 -->
-
-<div
-  id="modal"
-  class="modal"
->
-
-<div class="modal-box">
-
-<div class="modal-head">
-
-<b>FIGURE</b>
-
-<button
-  class="close"
-  onclick="closeModal()"
->
-×
-</button>
-
-</div>
-
-
-<div class="detail">
-
-<div
-  class="detail-image"
-  id="detail-image"
->
-NO IMAGE
-</div>
-
-
-<div class="detail-info">
-
-<h2 id="d-name"></h2>
-
-<div class="row">
-<b>メーカー</b>
-<span id="d-maker"></span>
-</div>
-
-<div class="row">
-<b>作品</b>
-<span id="d-series"></span>
-</div>
-
-<div class="row">
-<b>キャラクター</b>
-<span id="d-character"></span>
-</div>
-
-<div class="row">
-<b>スケール</b>
-<span id="d-scale"></span>
-</div>
-
-</div>
-
-</div>
-
-
-<!-- 写真 -->
-
-<div class="photos">
-
-<div class="photos-title">
-PHOTOS
-</div>
-
-<div class="photos-heading">
-このフィギュアの写真
-</div>
-
-<div
-  id="photo-grid"
-  class="photo-grid"
->
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- 写真拡大 -->
-
-<div
-  id="viewer"
-  class="viewer"
-  onclick="closeViewer()"
->
-
-<button
-  class="viewer-close"
-  onclick="closeViewer()"
->
-×
-</button>
-
-<img
-  id="viewer-image"
-  src=""
-  alt=""
->
-
-</div>
-
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
-<script>
-
-/* =========================
-   Supabase
-========================= */
-
-const SUPABASE_URL =
-  "https://voftbkqqkiwybnjlnlkw.supabase.co";
-
-const SUPABASE_KEY =
-  "sb_publishable_FqVACHntdH1Nu1RzfpytYw_Vayf41mv";
-
-const supabase =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
-
-
-/* =========================
-   画面
-========================= */
-
-const grid =
-  document.getElementById("grid");
-
-const modal =
-  document.getElementById("modal");
-
-const photoGrid =
-  document.getElementById("photo-grid");
-
-let figures = [];
-
-
-/* =========================
-   フィギュア取得
-========================= */
-
-async function loadFigures(){
-
-  grid.innerHTML = `
-    <div class="message">
-      FIGURES LOADING...
     </div>
-  `;
+
+  </header>
 
 
-  const result =
-    await supabase
-      .from("figures")
-      .select(
-        "id,name,series,manufaster,sharactername,scale"
-      );
+  <!-- =========================
+       MAIN
+  ========================== -->
+
+  <main id="app">
+
+    <!-- JavaScriptでここに表示します -->
+
+  </main>
 
 
-  if(result.error){
+  <!-- =========================
+       FOOTER
+  ========================== -->
 
-    console.error(
-      "FIGURES ERROR",
-      result.error
-    );
+  <footer class="site-footer">
 
-    grid.innerHTML = `
-      <div class="message">
-        <strong>読み込みエラー</strong><br><br>
-        ${result.error.message}
-      </div>
-    `;
+    <p>
+      HENTAI FIGURE SHELF
+    </p>
 
-    return;
-  }
+    <p class="footer-small">
+      成人向けフィギュアを含みます。閲覧・利用にあたっては、
+      利用者の居住地域および各サービスの利用規約に従ってください。
+    </p>
 
-
-  figures =
-    result.data || [];
+  </footer>
 
 
-  if(figures.length === 0){
+  <script src="data.js"></script>
 
-    grid.innerHTML = `
-      <div class="message">
-        フィギュアがありません。
-      </div>
-    `;
+  <script>
 
-    return;
-  }
+    /* =====================================================
+       基本設定
+    ====================================================== */
 
-
-  grid.innerHTML = "";
+    const app = document.getElementById("app");
 
 
-  figures.forEach(
-    (figure,index) => {
+    /* =====================================================
+       HOME
+    ====================================================== */
 
-      const card =
-        document.createElement("div");
+    function showHome() {
 
-      card.className = "card";
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
 
+      document.title = "HENTAI FIGURE SHELF";
 
-      card.innerHTML = `
+      let html = "";
 
-        <div class="image">
-          NO IMAGE
-        </div>
+      html += `
+        <section class="hero">
 
-        <div class="info">
+          <div class="hero-inner">
 
-          <div class="maker">
-            ${escapeHTML(
-              figure.manufaster || ""
-            )}
+            <p class="eyebrow">
+              ADULT FIGURE DATABASE
+            </p>
+
+            <h1>
+              HENTAI<br>
+              <span>FIGURE SHELF</span>
+            </h1>
+
+            <p class="hero-description">
+              フィギュアそのものを主役として記録・共有するデータベース。
+            </p>
+
           </div>
 
-          <div class="name">
-            ${escapeHTML(
-              figure.name || ""
-            )}
-          </div>
-
-          <div class="meta">
-            ${escapeHTML(
-              figure.series || ""
-            )}
-          </div>
-
-        </div>
-
+        </section>
       `;
 
 
-      card.onclick =
-        () => openFigure(index);
+      html += `
+        <section class="figure-section">
+
+          <div class="section-heading">
+
+            <p class="eyebrow">
+              FIGURES
+            </p>
+
+            <h2>
+              FIGURE SHELF
+            </h2>
+
+            <p>
+              フィギュアを選択すると、
+              それを所有する人たちの記録を見ることができます。
+            </p>
+
+          </div>
+
+          <div class="figure-grid">
+      `;
 
 
-      grid.appendChild(card);
+      figures.forEach(function(figure) {
 
-    }
-  );
+        html += `
 
-}
-
-
-/* =========================
-   詳細
-========================= */
-
-async function openFigure(index){
-
-  const figure =
-    figures[index];
-
-
-  document.getElementById(
-    "d-name"
-  ).textContent =
-    figure.name || "";
-
-
-  document.getElementById(
-    "d-maker"
-  ).textContent =
-    figure.manufaster || "";
-
-
-  document.getElementById(
-    "d-series"
-  ).textContent =
-    figure.series || "";
-
-
-  document.getElementById(
-    "d-character"
-  ).textContent =
-    figure.sharactername || "";
-
-
-  document.getElementById(
-    "d-scale"
-  ).textContent =
-    figure.scale || "";
-
-
-  modal.classList.add("show");
-
-
-  await loadPhotos(
-    figure.id
-  );
-
-}
-
-
-/* =========================
-   写真取得
-========================= */
-
-async function loadPhotos(
-  figureId
-){
-
-  photoGrid.innerHTML = `
-    <div class="message">
-      写真を読み込み中...
-    </div>
-  `;
-
-
-  const result =
-    await supabase
-      .from("figure-photos")
-      .select(
-        "created_at,figure_id,user_id,image_url,caption"
-      )
-      .eq(
-        "figure_id",
-        figureId
-      )
-      .order(
-        "created_at",
-        {
-          ascending:false
-        }
-      );
-
-
-  if(result.error){
-
-    console.error(
-      "PHOTO ERROR",
-      result.error
-    );
-
-    photoGrid.innerHTML = `
-      <div class="message">
-        <strong>写真の読み込みエラー</strong><br><br>
-        ${result.error.message}
-      </div>
-    `;
-
-    return;
-  }
-
-
-  const photos =
-    result.data || [];
-
-
-  if(photos.length === 0){
-
-    photoGrid.innerHTML = `
-      <div class="message">
-        このフィギュアの写真はまだありません。
-      </div>
-    `;
-
-    return;
-  }
-
-
-  photoGrid.innerHTML = "";
-
-
-  photos.forEach(
-    photo => {
-
-      const card =
-        document.createElement("div");
-
-      card.className =
-        "photo-card";
-
-
-      card.innerHTML = `
-
-        <div class="photo-image">
-
-          <img
-            src="${escapeHTML(
-              photo.image_url
-            )}"
-            alt=""
+          <article
+            class="figure-card"
+            onclick="showFigure('${escapeAttribute(figure.id)}')"
           >
 
-        </div>
+            <div class="figure-image">
 
-        ${
-          photo.caption
-          ?
-          `
-          <div class="photo-caption">
-            ${escapeHTML(
-              photo.caption
-            )}
+              <img
+                src="${escapeAttribute(figure.image)}"
+                alt="${escapeAttribute(figure.name)}"
+                loading="lazy"
+                onerror="this.style.display='none'; this.parentElement.classList.add('no-image');"
+              >
+
+              <span class="no-image-text">
+                NO IMAGE
+              </span>
+
+            </div>
+
+            <div class="figure-info">
+
+              <h3>
+                ${escapeHTML(figure.name)}
+              </h3>
+
+              <dl>
+
+                <div>
+                  <dt>メーカー</dt>
+                  <dd>${escapeHTML(figure.maker)}</dd>
+                </div>
+
+                <div>
+                  <dt>作品</dt>
+                  <dd>${escapeHTML(figure.series)}</dd>
+                </div>
+
+                <div>
+                  <dt>キャラクター</dt>
+                  <dd>${escapeHTML(figure.character)}</dd>
+                </div>
+
+                <div>
+                  <dt>スケール</dt>
+                  <dd>${escapeHTML(figure.scale)}</dd>
+                </div>
+
+              </dl>
+
+              <div class="owner-count">
+                ${getPostsForFigure(figure.id).length} PEOPLE
+              </div>
+
+            </div>
+
+          </article>
+
+        `;
+
+      });
+
+
+      html += `
           </div>
-          `
-          :
-          ""
+
+        </section>
+      `;
+
+
+      html += `
+        <section class="submission-section">
+
+          <div class="submission-box">
+
+            <p class="eyebrow">
+              JOIN THE SHELF
+            </p>
+
+            <h2>
+              このフィギュアを<br>
+              持っていますか？
+            </h2>
+
+            <p>
+              あなたのフィギュアの写真も
+              このSHELFに加えることができます。
+            </p>
+
+            <button
+              class="primary-button"
+              onclick="openSubmissionMail()"
+            >
+              POST YOUR FIGURE
+            </button>
+
+          </div>
+
+        </section>
+      `;
+
+
+      app.innerHTML = html;
+
+    }
+
+
+    /* =====================================================
+       FIGURE DETAIL
+    ====================================================== */
+
+    function showFigure(figureId) {
+
+      const figure = figures.find(
+        function(item) {
+          return item.id === figureId;
         }
+      );
+
+      if (!figure) {
+        showHome();
+        return;
+      }
+
+
+      const posts = getPostsForFigure(figureId);
+
+
+      document.title =
+        figure.name + " | HENTAI FIGURE SHELF";
+
+
+      let html = `
+
+        <section class="detail-page">
+
+          <button
+            class="back-button"
+            onclick="showHome()"
+          >
+            ← BACK TO FIGURES
+          </button>
+
+
+          <div class="figure-detail-header">
+
+            <div class="detail-main-image">
+
+              <img
+                src="${escapeAttribute(figure.image)}"
+                alt="${escapeAttribute(figure.name)}"
+                onerror="this.style.display='none'; this.parentElement.classList.add('no-image');"
+              >
+
+              <span class="no-image-text">
+                NO IMAGE
+              </span>
+
+            </div>
+
+
+            <div class="detail-information">
+
+              <p class="eyebrow">
+                FIGURE
+              </p>
+
+              <h1>
+                ${escapeHTML(figure.name)}
+              </h1>
+
+              <dl class="detail-meta">
+
+                <div>
+                  <dt>メーカー</dt>
+                  <dd>${escapeHTML(figure.maker)}</dd>
+                </div>
+
+                <div>
+                  <dt>作品</dt>
+                  <dd>${escapeHTML(figure.series)}</dd>
+                </div>
+
+                <div>
+                  <dt>キャラクター</dt>
+                  <dd>${escapeHTML(figure.character)}</dd>
+                </div>
+
+                <div>
+                  <dt>スケール</dt>
+                  <dd>${escapeHTML(figure.scale)}</dd>
+                </div>
+
+              </dl>
+
+              ${
+                figure.description
+                  ? `
+                    <p class="figure-description">
+                      ${escapeHTML(figure.description)}
+                    </p>
+                  `
+                  : ""
+              }
+
+            </div>
+
+          </div>
+
+
+          <div class="owners-heading">
+
+            <div>
+
+              <p class="eyebrow">
+                OWNERS
+              </p>
+
+              <h2>
+                PEOPLE WHO OWN THIS FIGURE
+              </h2>
+
+            </div>
+
+            <div class="owner-total">
+              ${posts.length} PEOPLE
+            </div>
+
+          </div>
+
+
+          <div class="owner-grid">
+      `;
+
+
+      if (posts.length === 0) {
+
+        html += `
+
+          <div class="empty-state">
+
+            <p>
+              まだこのフィギュアの記録はありません。
+            </p>
+
+            <button
+              class="primary-button"
+              onclick="openSubmissionMail('${escapeAttribute(figure.name)}')"
+            >
+              最初の投稿をする
+            </button>
+
+          </div>
+
+        `;
+
+      }
+
+
+      posts.forEach(function(post) {
+
+        html += `
+
+          <article class="owner-card">
+
+            <div class="owner-photo">
+
+              <img
+                src="${escapeAttribute(post.image)}"
+                alt="${escapeAttribute(post.owner)}の${escapeAttribute(figure.name)}"
+                loading="lazy"
+                onerror="this.style.display='none'; this.parentElement.classList.add('no-image');"
+              >
+
+              <span class="no-image-text">
+                NO IMAGE
+              </span>
+
+            </div>
+
+
+            <div class="owner-content">
+
+              <div class="owner-name">
+
+                <span class="owner-label">
+                  OWNER
+                </span>
+
+                <h3>
+                  ${escapeHTML(post.owner)}
+                </h3>
+
+              </div>
+
+
+              <div class="owner-meta">
+
+                ${
+                  post.date
+                    ? `
+                      <div>
+                        <span>DATE</span>
+                        <strong>
+                          ${escapeHTML(post.date)}
+                        </strong>
+                      </div>
+                    `
+                    : ""
+                }
+
+                ${
+                  post.location
+                    ? `
+                      <div>
+                        <span>PLACE</span>
+                        <strong>
+                          ${escapeHTML(post.location)}
+                        </strong>
+                      </div>
+                    `
+                    : ""
+                }
+
+              </div>
+
+
+              ${
+                post.note
+                  ? `
+                    <p class="owner-note">
+                      ${escapeHTML(post.note)}
+                    </p>
+                  `
+                  : ""
+              }
+
+
+              ${
+                post.comment
+                  ? `
+                    <div class="comment">
+
+                      <span class="comment-label">
+                        COMMENT
+                      </span>
+
+                      <p>
+                        ${escapeHTML(post.comment)}
+                      </p>
+
+                    </div>
+                  `
+                  : ""
+              }
+
+            </div>
+
+          </article>
+
+        `;
+
+      });
+
+
+      html += `
+          </div>
+
+
+          <section class="detail-submit">
+
+            <p class="eyebrow">
+              YOUR SHELF
+            </p>
+
+            <h2>
+              このフィギュアを<br>
+              あなたも持っていますか？
+            </h2>
+
+            <p>
+              写真と簡単な情報を送ってください。
+              確認後、このページに追加します。
+            </p>
+
+            <button
+              class="primary-button"
+              onclick="openSubmissionMail('${escapeAttribute(figure.name)}')"
+            >
+              POST YOUR FIGURE
+            </button>
+
+          </section>
+
+        </section>
+      `;
+
+
+      app.innerHTML = html;
+
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    /* =====================================================
+       ABOUT
+    ====================================================== */
+
+    function showAbout() {
+
+      document.title = "ABOUT | HENTAI FIGURE SHELF";
+
+
+      app.innerHTML = `
+
+        <section class="about-page">
+
+          <button
+            class="back-button"
+            onclick="showHome()"
+          >
+            ← BACK TO FIGURES
+          </button>
+
+
+          <div class="about-inner">
+
+            <p class="eyebrow">
+              ABOUT THIS SHELF
+            </p>
+
+            <h1>
+              FIGURES ARE<br>
+              OWNED BY PEOPLE.
+            </h1>
+
+
+            <div class="about-text">
+
+              <p>
+                HENTAI FIGURE SHELFは、
+                フィギュアそのものだけではなく、
+                そのフィギュアを持っている人たちの記録を
+                残すための個人データベースです。
+              </p>
+
+              <p>
+                同じフィギュアを持っていても、
+                飾っている場所や撮影した場所、
+                その人にとっての思い出はそれぞれ違います。
+              </p>
+
+              <p>
+                ひとつのフィギュアに、
+                複数の人の記録が紐づいていく。
+              </p>
+
+              <p>
+                そんな「共同所有」に近い感覚で、
+                フィギュアを残していくことを目指しています。
+              </p>
+
+            </div>
+
+
+            <div class="about-submit">
+
+              <p class="eyebrow">
+                WANT TO JOIN?
+              </p>
+
+              <p>
+                あなたの持っているフィギュアも
+                SHELFに追加できます。
+              </p>
+
+              <button
+                class="primary-button"
+                onclick="openSubmissionMail()"
+              >
+                SEND YOUR PHOTO
+              </button>
+
+            </div>
+
+          </div>
+
+        </section>
 
       `;
 
 
-      card.onclick =
-        () => openViewer(
-          photo.image_url
-        );
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
 
 
-      photoGrid.appendChild(
-        card
+    /* =====================================================
+       投稿用メールを作る
+    ====================================================== */
+
+    function openSubmissionMail(figureName = "") {
+
+      const subject =
+        figureName
+          ? "FIGURE SHELF 投稿｜" + figureName
+          : "FIGURE SHELF 投稿";
+
+      const body =
+
+`FIGURE SHELFへの投稿です。
+
+【フィギュア】
+${figureName}
+
+【名前 / ハンドルネーム】
+
+
+【いつ】
+
+
+【どこで】
+
+
+【ひとこと】
+
+
+【コメント】
+※既存の投稿へのコメントの場合はこちらに記入してください。
+
+
+写真をこのメールに添付してください。
+
+よろしくお願いします。`;
+
+
+      const mailto =
+        "mailto:?subject=" +
+        encodeURIComponent(subject) +
+        "&body=" +
+        encodeURIComponent(body);
+
+
+      window.location.href = mailto;
+
+    }
+
+
+    /* =====================================================
+       データ取得
+    ====================================================== */
+
+    function getPostsForFigure(figureId) {
+
+      return posts.filter(
+        function(post) {
+          return post.figureId === figureId;
+        }
       );
 
     }
-  );
-
-}
 
 
-/* =========================
-   閉じる
-========================= */
+    /* =====================================================
+       XSS対策用
+    ====================================================== */
 
-function closeModal(){
+    function escapeHTML(value) {
 
-  modal.classList.remove(
-    "show"
-  );
+      if (value === undefined || value === null) {
+        return "";
+      }
 
-}
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 
-
-function openViewer(
-  imageUrl
-){
-
-  document.getElementById(
-    "viewer-image"
-  ).src =
-    imageUrl;
-
-  document.getElementById(
-    "viewer"
-  ).classList.add(
-    "show"
-  );
-
-}
+    }
 
 
-function closeViewer(){
+    function escapeAttribute(value) {
 
-  document.getElementById(
-    "viewer"
-  ).classList.remove(
-    "show"
-  );
+      return escapeHTML(value);
 
-}
+    }
 
 
-/* =========================
-   HTMLエスケープ
-========================= */
+    /* =====================================================
+       初期表示
+    ====================================================== */
 
-function escapeHTML(value){
+    showHome();
 
-  return String(value)
-
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-
-    .replace(
-      /</g,
-      "&lt;"
-    )
-
-    .replace(
-      />/g,
-      "&gt;"
-    )
-
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-
-    .replace(
-      /'/g,
-      "&#039;"
-    );
-
-}
-
-
-/* =========================
-   開始
-========================= */
-
-loadFigures();
-
-</script>
+  </script>
 
 </body>
-
 </html>
-
 
